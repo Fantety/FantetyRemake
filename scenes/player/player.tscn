@@ -1,0 +1,45 @@
+[gd_scene load_steps=8 format=3 uid="uid://dn6eh0qbbf3op"]
+
+[ext_resource type="Script" path="res://scenes/player/scripts/player.gd" id="1_rjjqd"]
+[ext_resource type="SpriteFrames" uid="uid://bjtxu22oncavt" path="res://scenes/player/res/player.tres" id="2_q1bdl"]
+[ext_resource type="Script" path="res://addons/shaker/shaker.gd" id="3_3voe8"]
+[ext_resource type="Script" path="res://scenes/player/scripts/camera.gd" id="3_422tv"]
+[ext_resource type="AudioStream" uid="uid://wq7eg55mcyl5" path="res://assets/sound/run.wav" id="5_i38c2"]
+[ext_resource type="AudioStream" uid="uid://1j8k4rwbw2t" path="res://assets/sound/jump.wav" id="6_5emlw"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yw8jv"]
+radius = 12.0
+height = 44.0
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_rjjqd")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+light_mask = 3
+sprite_frames = ExtResource("2_q1bdl")
+animation = &"stand"
+autoplay = "stand"
+frame_progress = 0.616157
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 3)
+shape = SubResource("CapsuleShape2D_yw8jv")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+limit_top = 45
+limit_right = 425
+position_smoothing_enabled = true
+script = ExtResource("3_422tv")
+
+[node name="Shaker" type="Node" parent="Camera2D" node_paths=PackedStringArray("target_node")]
+script = ExtResource("3_3voe8")
+target_node = NodePath("..")
+target_property = &"offset"
+
+[node name="RunSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_i38c2")
+bus = &"Effect"
+
+[node name="JumpSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_5emlw")
+bus = &"Effect"
