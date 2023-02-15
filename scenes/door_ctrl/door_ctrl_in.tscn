@@ -1,6 +1,5 @@
-[gd_scene load_steps=18 format=3 uid="uid://78tsdgocafh"]
+[gd_scene load_steps=13 format=3 uid="uid://78tsdgocafh"]
 
-[ext_resource type="Shader" path="res://scenes/door_ctrl/shader/door_ctrl_outline.gdshader" id="1_4jo3w"]
 [ext_resource type="Texture2D" uid="uid://cu5q0ror77dby" path="res://assets/img/door_ctrl_sheet.png" id="2_7sdly"]
 [ext_resource type="Script" path="res://scenes/door_ctrl/scripts/door_ctrl.gd" id="3_vtyji"]
 [ext_resource type="Texture2D" uid="uid://biu30j2g7qmya" path="res://assets/img/special_effect_board.png" id="4_b56lr"]
@@ -9,15 +8,6 @@
 [ext_resource type="AudioStream" uid="uid://bj118cmukalla" path="res://assets/sound/input_passwd.wav" id="7_cic16"]
 [ext_resource type="Texture2D" uid="uid://tnhhsjx73col" path="res://assets/img/progress_under.png" id="8_x50w3"]
 [ext_resource type="Texture2D" uid="uid://b1dyl8752ln8j" path="res://assets/img/progress_progress.png" id="9_qrvfa"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_cy1nq"]
-shader = ExtResource("1_4jo3w")
-shader_parameter/rainbow = false
-shader_parameter/line_color = Color(1, 1, 1, 1)
-shader_parameter/line_scale = 0.0
-shader_parameter/frequency = 0.5
-shader_parameter/light_offset = 0.5
-shader_parameter/alpha = 1.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_s2k7c"]
 atlas = ExtResource("2_7sdly")
@@ -44,46 +34,8 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4q2of"]
 size = Vector2(11, 18)
 
-[sub_resource type="Animation" id="Animation_htcls"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:material:shader_parameter/line_scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-
-[sub_resource type="Animation" id="Animation_p45st"]
-resource_name = "show_outline"
-length = 0.3
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:material:shader_parameter/line_scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, 1.0]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_swawb"]
-_data = {
-"RESET": SubResource("Animation_htcls"),
-"show_outline": SubResource("Animation_p45st")
-}
-
 [node name="DoorCtrlIn" type="AnimatedSprite2D"]
 z_index = 5
-material = SubResource("ShaderMaterial_cy1nq")
 sprite_frames = SubResource("SpriteFrames_xksha")
 script = ExtResource("3_vtyji")
 
@@ -126,11 +78,6 @@ scale = Vector2(0.5, 0.5)
 fill_mode = 3
 texture_under = ExtResource("8_x50w3")
 texture_progress = ExtResource("9_qrvfa")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_swawb")
-}
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

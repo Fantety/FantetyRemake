@@ -38,7 +38,6 @@ func _process(delta):
 func _on_area_2d_body_entered(body):
 	if body.name == "Player":
 		is_in_self = true
-		$AnimationPlayer.play("show_outline")
 		CommonSignal.emit_signal("call_show_player_emo", Common.EmoType.DEFAULT)
 	pass # Replace with function body.
 
@@ -46,16 +45,11 @@ func _on_area_2d_body_entered(body):
 func _on_area_2d_body_exited(body):
 	if body.name == "Player":
 		is_in_self = false
-		$AnimationPlayer.play_backwards("show_outline")
 		CommonSignal.emit_signal("call_hide_player_emo")
 	pass # Replace with function body.
 
 func change_door():
 	CommonSignal.emit_signal("call_change_door_status",get_node(connected_door).get_door_idx(),!get_parent().door_status)
-	if get_parent().door_status:
-		set_frame(1)
-	else:
-		set_frame(0)
 
 
 

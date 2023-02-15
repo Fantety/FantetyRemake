@@ -22,6 +22,21 @@ func _process(delta):
 
 
 func do_reach_floor(floor):
+	$Timer.start()
+	if Common.elevator_current_floor == 4:
+		CommonSignal.emit_signal("call_change_door_status",Common.DoorIdx.ELEVATOR_FOURTH_LEFT,false)
+		CommonSignal.emit_signal("call_change_door_status",Common.DoorIdx.ELEVATOR_FOURTH_RIGHT,false)
+	elif Common.elevator_current_floor == 3:
+		CommonSignal.emit_signal("call_change_door_status",Common.DoorIdx.ELEVATOR_THRID_LEFT,false)
+		CommonSignal.emit_signal("call_change_door_status",Common.DoorIdx.ELEVATOR_THRID_RIGHT,false)
+	elif Common.elevator_current_floor == 2:
+		CommonSignal.emit_signal("call_change_door_status",Common.DoorIdx.ELEVATOR_SECOND_LEFT,false)
+		CommonSignal.emit_signal("call_change_door_status",Common.DoorIdx.ELEVATOR_SECOND_RIGHT,false)
+	elif Common.elevator_current_floor == 1:
+		CommonSignal.emit_signal("call_change_door_status",Common.DoorIdx.ELEVATOR_FIRST_LEFT,false)
+		CommonSignal.emit_signal("call_change_door_status",Common.DoorIdx.ELEVATOR_FIRST_RIGHT,false)
+		pass
+	await $Timer.timeout
 	$AnimatedSprite2D.play()
 	$Start.play()
 	$Lights/PointLight2D.set_color(Color(1,0,0.5,1))
@@ -36,7 +51,7 @@ func do_reach_floor(floor):
 	$Arrived.play()
 	$AnimatedSprite2D.pause()
 	Common.elevator_current_floor = floor
-	CommonSignal.emit_signal("call_elevator_arrived")
+	CommonSignal.emit_signal("call_elevator_arrived",floor)
 	pass
 
 
