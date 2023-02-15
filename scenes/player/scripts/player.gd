@@ -6,9 +6,12 @@ const JUMP_VELOCITY = -200.0
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-
-
 var is_jumped = false
+
+func _ready():
+	$Emo.hide()
+	CommonSignal.call_show_player_emo.connect(Callable(self,"show_player_emo"))
+	CommonSignal.call_hide_player_emo.connect(Callable(self,"hide_player_emo"))
 
 func _physics_process(delta):
 	# Add the gravity.
@@ -40,5 +43,16 @@ func _physics_process(delta):
 			$RunSound.stop()
 			velocity.x = move_toward(velocity.x, 0, speed)
 			speed = 50.0
+		move_and_slide()
 
-	move_and_slide()
+func show_player_emo(emo_type):
+	$Emo.show()
+	if emo_type == Common.EmoType.AMAZED:
+		$Emo.play("amazed")
+	elif emo_type == Common.EmoType.DEFAULT:
+		$Emo.play("default")
+	elif emo_type == Common.EmoType.QUERY:
+		$Emo.play("query")
+	pass
+func hide_player_emo():
+	$Emo.hide()

@@ -18,6 +18,7 @@ config/icon="res://icon.svg"
 
 CommonSignal="*res://common/common_signal.gd"
 Common="*res://common/common.gd"
+DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 
 [display]
 
@@ -30,7 +31,7 @@ window/stretch/aspect="expand"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/shaker/plugin.cfg")
+enabled=PackedStringArray("res://addons/shaker/plugin.cfg", "res://addons/dialogue_manager/plugin.cfg")
 
 [input]
 

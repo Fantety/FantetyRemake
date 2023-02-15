@@ -3,7 +3,6 @@ extends AnimatedSprite2D
 
 @export var connected_door:NodePath
 var is_in_self = false
-var door_status = false
 
 var tick_count = 0.01
 var tick = 0.0
@@ -17,7 +16,7 @@ func _ready():
 func _process(delta):
 	if !Common.input_lock && is_in_self:
 		if Input.is_action_just_pressed("action"):
-			if door_status == true:
+			if get_parent().door_status == true:
 				change_door()
 			else:
 				$TextureProgressBar.show()
@@ -25,7 +24,7 @@ func _process(delta):
 			$TextureProgressBar.hide()
 			$TextureProgressBar.set_value(0.0)
 			$Input.stop()
-		if Input.is_action_pressed("action") && door_status == false:
+		if Input.is_action_pressed("action") && get_parent().door_status == false:
 			if !$Input.is_playing():
 				$Input.play()
 			if tick > tick_count:
@@ -39,18 +38,21 @@ func _process(delta):
 func _on_area_2d_body_entered(body):
 	if body.name == "Player":
 		is_in_self = true
+		$AnimationPlayer.play("show_outline")
+		CommonSignal.emit_signal("call_show_player_emo", Common.EmoType.DEFAULT)
 	pass # Replace with function body.
 
 
 func _on_area_2d_body_exited(body):
 	if body.name == "Player":
 		is_in_self = false
+		$AnimationPlayer.play_backwards("show_outline")
+		CommonSignal.emit_signal("call_hide_player_emo")
 	pass # Replace with function body.
 
 func change_door():
-	door_status = !door_status
-	CommonSignal.emit_signal("call_change_door_status",get_node(connected_door).get_door_idx(),door_status)
-	if door_status:
+	CommonSignal.emit_signal("call_change_door_status",get_node(connected_door).get_door_idx(),!get_parent().door_status)
+	if get_parent().door_status:
 		set_frame(1)
 	else:
 		set_frame(0)

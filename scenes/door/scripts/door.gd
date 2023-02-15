@@ -2,7 +2,7 @@ extends AnimatableBody2D
 
 
 var door_idx : get = get_door_idx, set = set_door_idx
-var door_status = false
+var door_status:bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -14,11 +14,6 @@ func set_door_idx(idx):
 func get_door_idx()->Common.DoorIdx:
 	return door_idx
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-
-
 func change_door_status(idx, status):
 	if idx == door_idx && status != door_status:
 		if !$AudioStreamPlayer.is_playing():
@@ -28,15 +23,21 @@ func change_door_status(idx, status):
 			$DoorSprite.play("default")
 			$AnimationPlayer.play("default")
 			door_status = status
+			for i in get_children(false):
+				if i.name.contains("DoorCtrl"):
+					i.set_frame(1)
+			await $AnimationPlayer.animation_finished
+			$CollisionShape2D.set_deferred("disabled",true)
 		else:
 			$DoorSprite.play_backwards("default")
 			$AnimationPlayer.play_backwards("default")
 			door_status = status
-			pass
-		pass
-	pass
-
+			for i in get_children(false):
+				if i.name.contains("DoorCtrl"):
+					i.set_frame(0)
+			$CollisionShape2D.set_deferred("disabled",false)
 
 func _on_animation_player_animation_finished(anim_name):
 	$AudioStreamPlayer.stop()
 	pass # Replace with function body.
+

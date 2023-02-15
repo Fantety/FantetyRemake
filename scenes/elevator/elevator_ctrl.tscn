@@ -1,0 +1,49 @@
+[gd_scene load_steps=3 format=3 uid="uid://bmefx3ej6f66k"]
+
+[ext_resource type="FontFile" uid="uid://dapnec1634ikd" path="res://assets/font/ChuangKeTieJinGangTi-2.otf" id="1_gd5qd"]
+[ext_resource type="Script" path="res://scenes/elevator/scripts/elevator_ctrl.gd" id="1_o0uer"]
+
+[node name="ElevatorCtrl" type="CanvasLayer"]
+script = ExtResource("1_o0uer")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.5
+offset_top = -40.0
+offset_right = 28.5
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+
+[node name="Button4" type="Button" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_gd5qd")
+text = "4楼"
+
+[node name="Button3" type="Button" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_gd5qd")
+text = "3楼"
+
+[node name="Button2" type="Button" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_gd5qd")
+text = "2楼"
+
+[node name="Button1" type="Button" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_gd5qd")
+text = "1楼"
+
+[connection signal="pressed" from="PanelContainer/VBoxContainer/Button4" to="." method="_on_button_4_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/Button3" to="." method="_on_button_3_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/Button2" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/Button1" to="." method="_on_button_1_pressed"]

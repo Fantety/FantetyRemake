@@ -1,0 +1,39 @@
+[gd_resource type="SpriteFrames" load_steps=6 format=3 uid="uid://cv07pp3debgvp"]
+
+[ext_resource type="Texture2D" uid="uid://cp1815t65ej7b" path="res://assets/img/elevator_num.png" id="1_ywbkw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v3epo"]
+atlas = ExtResource("1_ywbkw")
+region = Rect2(0, 0, 64, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jvy1d"]
+atlas = ExtResource("1_ywbkw")
+region = Rect2(64, 0, 64, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4jxcx"]
+atlas = ExtResource("1_ywbkw")
+region = Rect2(128, 0, 64, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nxje7"]
+atlas = ExtResource("1_ywbkw")
+region = Rect2(192, 0, 64, 96)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v3epo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jvy1d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4jxcx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nxje7")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
