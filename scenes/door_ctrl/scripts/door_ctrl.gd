@@ -3,9 +3,15 @@ extends AnimatedSprite2D
 
 @export var connected_door:NodePath
 var is_in_self = false
-
+var door_permission = Common.DoorPermission.NONE:
+	set = set_door_permission, get = get_door_permission
 var tick_count = 0.01
 var tick = 0.0
+
+func set_door_permission(permission):
+	door_permission = permission
+func get_door_permission()->Common.DoorPermission:
+	return door_permission
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$TextureProgressBar.hide()
@@ -29,7 +35,7 @@ func _process(delta):
 				$Input.play()
 			if tick > tick_count:
 				tick = 0.0
-				$TextureProgressBar.set_value($TextureProgressBar.get_value()+1)
+				$TextureProgressBar.set_value($TextureProgressBar.get_value()+1.5)
 			else:
 				tick += delta
 		pass
@@ -57,7 +63,11 @@ func _on_texture_progress_bar_value_changed(value):
 	if value == 100:
 		$TextureProgressBar.hide()
 		$TextureProgressBar.set_value(0.0)
-		if !$InputRight.is_playing():
-				$InputRight.play()
-		change_door()
+		if door_permission < Common.player_permission:
+			if !$InputRight.is_playing():
+					$InputRight.play()
+			change_door()
+		else:
+			if !$InputError.is_playing():
+				$InputError.play()
 	pass # Replace with function body.

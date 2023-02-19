@@ -1,0 +1,57 @@
+[gd_scene load_steps=7 format=3 uid="uid://bd11nqlkocitf"]
+
+[ext_resource type="LabelSettings" uid="uid://cy82vij7ruyog" path="res://scenes/tips/res/tips_title_label_settings.tres" id="1_2gkgu"]
+[ext_resource type="Script" path="res://scenes/tips/Scripts/tips.gd" id="1_wgiho"]
+[ext_resource type="LabelSettings" uid="uid://c2l8674ldeme3" path="res://scenes/tips/res/tips_content_label_settings.tres" id="2_6p3ud"]
+[ext_resource type="LabelSettings" uid="uid://ccgkbaq1t4jcy" path="res://scenes/tips/res/prompt_label_settings.tres" id="4_7e7sn"]
+[ext_resource type="AudioStream" uid="uid://coo7vlkvpyebv" path="res://assets/sound/recieve_message.wav" id="5_e8bc7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1lxmk"]
+bg_color = Color(0, 0, 0, 0.588235)
+
+[node name="Tips" type="CanvasLayer"]
+process_mode = 2
+script = ExtResource("1_wgiho")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_1lxmk")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Title"
+label_settings = ExtResource("1_2gkgu")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Content" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Content"
+label_settings = ExtResource("2_6p3ud")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 1
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "按 R 键继续"
+label_settings = ExtResource("4_7e7sn")
+horizontal_alignment = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_e8bc7")
+autoplay = true
+bus = &"Effect"

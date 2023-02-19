@@ -3,10 +3,12 @@ extends AnimatableBody2D
 
 var door_idx : get = get_door_idx, set = set_door_idx
 var door_status:bool = false
+var is_occured = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	CommonSignal.call_change_door_status.connect(Callable(self,"change_door_status"))
+	CommonSignal.call_player_collision_occured.connect(Callable(self,"change_door_occured_status"))
 	pass # Replace with function body.
 
 func set_door_idx(idx):
@@ -41,3 +43,20 @@ func _on_animation_player_animation_finished(anim_name):
 	$AudioStreamPlayer.stop()
 	pass # Replace with function body.
 
+func change_door_occured_status():
+	if get_door_idx()==Common.DoorIdx.BEDROOM:
+		is_occured = true
+
+func _on_sprint_area_body_entered(body):
+	if body.name == "Player" and is_occured == true and get_door_idx()==Common.DoorIdx.BEDROOM:
+		if randi_range(0,9) >= 6:
+			change_door_status(get_door_idx(),true)
+		pass
+		is_occured = false
+	pass # Replace with function body.
+
+
+func _on_sprint_area_body_exited(body):
+	if body.name == "Player":
+		is_occured = false
+	pass # Replace with function body.

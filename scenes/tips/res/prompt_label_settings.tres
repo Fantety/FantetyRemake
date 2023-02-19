@@ -1,0 +1,8 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://ccgkbaq1t4jcy"]
+
+[ext_resource type="FontFile" uid="uid://dapnec1634ikd" path="res://assets/font/ChuangKeTieJinGangTi-2.otf" id="1_d4d7f"]
+
+[resource]
+font = ExtResource("1_d4d7f")
+font_size = 6
+font_color = Color(0.580392, 0.580392, 0.580392, 1)

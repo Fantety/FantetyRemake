@@ -111,8 +111,4 @@ func _process(_delta: float) -> void:
 			print_debug("Unmatched var type");
 
 func get_curve_interpolation(curve: Curve, max_time: float, time_left: float, _constant: bool) -> Variant:
-	if !_constant:
-		return 1 - curve.sample(time_left / max_time);
-		
-	else:
 		return 1;

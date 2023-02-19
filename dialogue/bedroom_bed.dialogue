@@ -1,4 +1,6 @@
-~ this_is_a_node_title
+~ start
 
 我: 一个很普通的床
+- 翻找一下
+	do on_dialogue_selected(Common.DialogueType.BEDROOM_BED_FIRST)
 - 离开 => END

@@ -8,11 +8,6 @@ func _ready():
 	pass # Replace with function body.
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-
-
 func elevator_arrived_open_door(floor):
 	if floor == 4:
 		CommonSignal.emit_signal("call_change_door_status",Common.DoorIdx.ELEVATOR_FOURTH_LEFT,true)
@@ -32,6 +27,11 @@ func elevator_arrived_open_door(floor):
 func show_area_dialogue(area_type):
 	if area_type == Common.Areas.BEDROOM_BED:
 		var dialog = load("res://dialogue/bedroom_bed.dialogue")
-		DialogueManager.show_example_dialogue_balloon(dialog,"this_is_a_node_title")
+		DialogueManager.show_example_dialogue_balloon(dialog,"start")
 		pass
+	pass
+
+func on_dialogue_selected(dialogue_type):
+	if dialogue_type == Common.DialogueType.BEDROOM_BED_FIRST:
+		Common.show_tips("神秘纸条","想出去吗，但是要注意外面\n电压不稳定的情况下门是可以撞开的")
 	pass

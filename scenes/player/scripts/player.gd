@@ -3,12 +3,16 @@ extends CharacterBody2D
 
 var current_area = Common.Areas.NONE
 
-var speed =50.0
+var speed =100.0
 const JUMP_VELOCITY = -200.0
 
+var speed_limit = 200.0
+var speed_scale_limit  =1.5
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var is_jumped = false
+var is_sprint = false
+
 
 func _ready():
 	$Emo.hide()
@@ -16,7 +20,10 @@ func _ready():
 	CommonSignal.call_hide_player_emo.connect(Callable(self,"hide_player_emo"))
 	CommonSignal.call_change_player_area.connect(Callable(self,"change_current_area"))
 
+
+
 func _physics_process(delta):
+	pass
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y += gravity * delta
@@ -26,6 +33,23 @@ func _physics_process(delta):
 			$JumpSound.play()
 		is_jumped = false
 	if !Common.input_lock:
+		if is_sprint:
+			if is_on_wall():
+				CommonSignal.emit_signal("call_shake_camera",0.2)
+				if !$Sprint.is_playing():
+					$Sprint.play() 
+				CommonSignal.emit_signal("call_player_collision_occured")
+				pass
+		if absf(velocity.x) >= 250.0:
+			is_sprint = true
+		else:
+			is_sprint = false
+		if Input.is_action_just_pressed("speed_up"):
+			speed_limit = 300.0
+			speed_scale_limit = 2.0
+		if Input.is_action_just_released("speed_up"):
+			speed_limit = 200.0
+			speed_scale_limit = 1.5
 		if Input.is_action_just_pressed("action") and current_area != Common.Areas.NONE:
 			CommonSignal.emit_signal("call_show_dialogue",current_area)
 			pass
@@ -34,8 +58,10 @@ func _physics_process(delta):
 			is_jumped = true
 		var direction = Input.get_axis("ui_left", "ui_right")
 		if direction:
-			if speed <= 150:
-				speed += 200*delta
+			if speed <= speed_limit:
+				speed += 100*delta
+			if $AnimatedSprite2D.speed_scale <=speed_scale_limit:
+				$AnimatedSprite2D.speed_scale += 20*delta
 			if !$RunSound.is_playing():
 				$RunSound.play()
 			velocity.x = direction * speed
@@ -48,7 +74,8 @@ func _physics_process(delta):
 			$AnimatedSprite2D.play("stand")
 			$RunSound.stop()
 			velocity.x = move_toward(velocity.x, 0, speed)
-			speed = 50.0
+			speed = 100.0
+			$AnimatedSprite2D.speed_scale = 1.0
 		move_and_slide()
 
 func show_player_emo(emo_type):
