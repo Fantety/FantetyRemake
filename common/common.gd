@@ -16,6 +16,11 @@ enum EmoType{
 	AMAZED = 1,
 	QUERY = 2,
 }
+
+enum Areas{
+	NONE = 0,
+	BEDROOM_BED = 1,
+}
 var elevator_current_floor = 4
 
 var input_lock = false

@@ -121,7 +121,7 @@ func show_example_dialogue_balloon(resource: Resource, title: String = "0", extr
 	var ExampleBalloonScene = load("res://addons/dialogue_manager/example_balloon/example_balloon.tscn")
 	var SmallExampleBalloonScene = load("res://addons/dialogue_manager/example_balloon/small_example_balloon.tscn")
 	
-	var is_small_window: bool = ProjectSettings.get_setting("display/window/size/viewport_width") < 400
+	var is_small_window: bool = ProjectSettings.get_setting("display/window/size/viewport_width") <= 400
 	var balloon: Node = (SmallExampleBalloonScene if is_small_window else ExampleBalloonScene).instantiate()
 	get_tree().current_scene.add_child(balloon)
 	balloon.start(resource, title, extra_game_states)

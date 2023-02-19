@@ -1,6 +1,8 @@
 extends CharacterBody2D
 
 
+var current_area = Common.Areas.NONE
+
 var speed =50.0
 const JUMP_VELOCITY = -200.0
 
@@ -12,6 +14,7 @@ func _ready():
 	$Emo.hide()
 	CommonSignal.call_show_player_emo.connect(Callable(self,"show_player_emo"))
 	CommonSignal.call_hide_player_emo.connect(Callable(self,"hide_player_emo"))
+	CommonSignal.call_change_player_area.connect(Callable(self,"change_current_area"))
 
 func _physics_process(delta):
 	# Add the gravity.
@@ -23,6 +26,9 @@ func _physics_process(delta):
 			$JumpSound.play()
 		is_jumped = false
 	if !Common.input_lock:
+		if Input.is_action_just_pressed("action") and current_area != Common.Areas.NONE:
+			CommonSignal.emit_signal("call_show_dialogue",current_area)
+			pass
 		if Input.is_action_just_pressed("ui_jump") and is_on_floor():
 			velocity.y = JUMP_VELOCITY
 			is_jumped = true
@@ -56,3 +62,7 @@ func show_player_emo(emo_type):
 	pass
 func hide_player_emo():
 	$Emo.hide()
+
+func change_current_area(area_type):
+	current_area = area_type
+	pass

@@ -20,6 +20,10 @@ CommonSignal="*res://common/common_signal.gd"
 Common="*res://common/common.gd"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 
+[dialogue_editor]
+
+dialogues_selected_dialogue="051cdb27-6007-4dfc-a0e8-f7617f4a5dd0"
+
 [display]
 
 window/size/viewport_width=400
