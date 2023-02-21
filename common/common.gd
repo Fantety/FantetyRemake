@@ -35,7 +35,6 @@ enum  DialogueType{
 
 
 var elevator_current_floor = 4
-
 var input_lock = false
 var player_permission = 0
 
@@ -45,3 +44,8 @@ func show_tips(title,content):
 	var tip_bar = load("res://scenes/tips/tips.tscn").instantiate()
 	tip_bar.show_tips(title,content)
 	add_child(tip_bar)
+
+func show_progress_bar(title,duration):
+	var progress_bar = load("res://scenes/progress_bar/progress_bar.tscn").instantiate()
+	progress_bar.start_progress(title,duration)
+	add_child(progress_bar)

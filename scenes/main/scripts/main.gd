@@ -33,5 +33,6 @@ func show_area_dialogue(area_type):
 
 func on_dialogue_selected(dialogue_type):
 	if dialogue_type == Common.DialogueType.BEDROOM_BED_FIRST:
-		Common.show_tips("神秘纸条","想出去吗，但是要注意外面\n电压不稳定的情况下门是可以撞开的")
+		var dialogue_species = CommonDialogue.DialogueSpecies[0]
+		Common.show_tips(dialogue_species,CommonDialogue.dialogue_dic[dialogue_species])
 	pass

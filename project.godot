@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 CommonSignal="*res://common/common_signal.gd"
 Common="*res://common/common.gd"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
+CommonDialogue="*res://common/common_dialogue.gd"
 
 [dialogue_editor]
 

@@ -13,10 +13,11 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var is_jumped = false
 var is_sprint = false
 
+var tick = 0.0
+var tick_count = 0.01
 
 func _ready():
 	$Emo.hide()
-	$Progress.hide()
 	CommonSignal.call_show_player_emo.connect(Callable(self,"show_player_emo"))
 	CommonSignal.call_hide_player_emo.connect(Callable(self,"hide_player_emo"))
 	CommonSignal.call_change_player_area.connect(Callable(self,"change_current_area"))
@@ -24,7 +25,11 @@ func _ready():
 
 
 func _physics_process(delta):
-	pass
+	if tick > tick_count:
+		tick = 0.0
+		CommonSignal.emit_signal("call_player_velocity",velocity)
+	else:
+		tick += delta
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y += gravity * delta
