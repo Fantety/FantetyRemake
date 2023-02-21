@@ -1,13 +1,17 @@
-[gd_scene load_steps=7 format=3 uid="uid://bd11nqlkocitf"]
+[gd_scene load_steps=9 format=3 uid="uid://bd11nqlkocitf"]
 
 [ext_resource type="LabelSettings" uid="uid://cy82vij7ruyog" path="res://scenes/tips/res/tips_title_label_settings.tres" id="1_2gkgu"]
 [ext_resource type="Script" path="res://scenes/tips/Scripts/tips.gd" id="1_wgiho"]
 [ext_resource type="LabelSettings" uid="uid://c2l8674ldeme3" path="res://scenes/tips/res/tips_content_label_settings.tres" id="2_6p3ud"]
 [ext_resource type="LabelSettings" uid="uid://ccgkbaq1t4jcy" path="res://scenes/tips/res/prompt_label_settings.tres" id="4_7e7sn"]
+[ext_resource type="Shader" path="res://scenes/tips/shader/tips.gdshader" id="4_nia4i"]
 [ext_resource type="AudioStream" uid="uid://coo7vlkvpyebv" path="res://assets/sound/recieve_message.wav" id="5_e8bc7"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1lxmk"]
 bg_color = Color(0, 0, 0, 0.588235)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rsaxv"]
+shader = ExtResource("4_nia4i")
 
 [node name="Tips" type="CanvasLayer"]
 process_mode = 2
@@ -46,6 +50,7 @@ vertical_alignment = 1
 autowrap_mode = 1
 
 [node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
+material = SubResource("ShaderMaterial_rsaxv")
 layout_mode = 2
 text = "按 R 键继续"
 label_settings = ExtResource("4_7e7sn")

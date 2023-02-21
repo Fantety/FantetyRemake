@@ -16,6 +16,7 @@ var is_sprint = false
 
 func _ready():
 	$Emo.hide()
+	$Progress.hide()
 	CommonSignal.call_show_player_emo.connect(Callable(self,"show_player_emo"))
 	CommonSignal.call_hide_player_emo.connect(Callable(self,"hide_player_emo"))
 	CommonSignal.call_change_player_area.connect(Callable(self,"change_current_area"))

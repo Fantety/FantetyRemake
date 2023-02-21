@@ -331,9 +331,14 @@ size = Vector2(85, 42)
 background_mode = 3
 glow_enabled = true
 glow_normalized = true
-glow_intensity = 8.0
-glow_strength = 1.2
-glow_bloom = 0.5
+glow_intensity = 3.02
+glow_strength = 0.91
+glow_bloom = 0.07
+glow_blend_mode = 1
+glow_hdr_threshold = 0.9
+glow_hdr_scale = 1.13
+glow_hdr_luminance_cap = 49.16
+glow_map_strength = 0.99
 adjustment_saturation = 0.01
 
 [node name="Main" type="Node2D"]
@@ -630,7 +635,7 @@ color = Color(0.0980392, 0.0980392, 0.0980392, 1)
 environment = SubResource("Environment_0mfqa")
 
 [node name="Player" parent="." instance=ExtResource("7_e2b6k")]
-position = Vector2(621.412, 68.5227)
+position = Vector2(625, 71)
 
 [node name="Elevator" parent="." instance=ExtResource("9_t8j3r")]
 position = Vector2(-98, 57)
