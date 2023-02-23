@@ -99,3 +99,13 @@ func hide_player_emo():
 func change_current_area(area_type):
 	current_area = area_type
 	pass
+
+
+func _on_area_2d_area_entered(area):
+	CommonSignal.emit_signal("call_player_enter_area",area.name)
+	pass # Replace with function body.
+
+
+func _on_area_2d_area_exited(area):
+	CommonSignal.emit_signal("call_player_exit_area",area.name)
+	pass # Replace with function body.

@@ -1,0 +1,16 @@
+~ start
+
+我: 这似乎是某个控制终端，破坏它应该能达到目的
+- 撬开一条缝 [if backpack["螺丝刀"]>0] => choose_first
+- 灌入杯子里的水 [if backpack["装着水的水杯"]>0]  => choose_first
+- 离开 => END
+
+~ choose_first
+if common_status["bedroom_status"] == Status.NORMAL
+	do on_dialogue_selected(Common.DialogueType.BEDROOM_TERMINAL_NORMAL_USE_SCREWDRIVER)
+
+~ choose_second
+if common_status["bedroom_status"] == Status.NORMAL
+	do on_dialogue_selected(Common.DialogueType.BEDROOM_TERMINAL_NORMAL_USE_WATER)
+if common_status["bedroom_status"] == Status.APRANCE_BROKEN
+	do on_dialogue_selected(Common.DialogueType.BEDROOM_TERMINAL_APRANCE_BROKEN_USE_WATER)

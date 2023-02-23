@@ -4,6 +4,8 @@ extends AnimatableBody2D
 var door_idx : get = get_door_idx, set = set_door_idx
 var door_status:bool = false
 var is_occured = false
+var is_stable = true
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -48,10 +50,14 @@ func change_door_occured_status():
 		is_occured = true
 
 func _on_sprint_area_body_entered(body):
-	if body.name == "Player" and is_occured == true and get_door_idx()==Common.DoorIdx.BEDROOM:
-		if randi_range(0,9) >= 6:
+	if body.name == "Player" \
+	and is_occured == true \
+	and get_door_idx()==Common.DoorIdx.BEDROOM \
+	and !is_stable:
+		var collision_value = randi_range(0,9)
+		print_debug("[碰撞门",get_door_idx(), "]:", collision_value )
+		if collision_value >= 6:
 			change_door_status(get_door_idx(),true)
-		pass
 		is_occured = false
 	pass # Replace with function body.
 

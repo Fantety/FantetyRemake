@@ -1,9 +1,5 @@
 extends Node
 
-var DialogueSpecies = [
-	"神秘纸条"
-]
-
 var dialogue_data = "res://assets/data/dialogue_data.json"
 var dialogue_dic:Dictionary
 

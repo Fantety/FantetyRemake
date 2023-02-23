@@ -20,6 +20,9 @@ enum EmoType{
 enum Areas{
 	NONE = 0,
 	BEDROOM_BED = 1,
+	BEDROOM_DESK,
+	BEDROOM_TERMINAL,
+	BEDROOM_SOFA,
 }
 
 enum  DoorPermission{
@@ -30,9 +33,13 @@ enum  DoorPermission{
 
 enum  DialogueType{
 	BEDROOM_BED_FIRST = 1,
+	BEDROOM_DESK_FIRST,
+	BEDROOM_TERMINAL_FIRST,
+	BEDROOM_SOFA_FIRST,
+	BEDROOM_TERMINAL_NORMAL_USE_WATER,
+	BEDROOM_TERMINAL_APRANCE_BROKEN_USE_WATER,
+	BEDROOM_TERMINAL_NORMAL_USE_SCREWDRIVER,
 }
-
-
 
 var elevator_current_floor = 4
 var input_lock = false

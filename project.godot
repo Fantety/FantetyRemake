@@ -20,10 +20,16 @@ CommonSignal="*res://common/common_signal.gd"
 Common="*res://common/common.gd"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 CommonDialogue="*res://common/common_dialogue.gd"
+CommonBackpack="*res://common/common_backpack.gd"
+CommonStatus="*res://common/common_status.gd"
 
 [dialogue_editor]
 
 dialogues_selected_dialogue="051cdb27-6007-4dfc-a0e8-f7617f4a5dd0"
+
+[dialogue_manager]
+
+states=["CommonBackpack", "CommonStatus"]
 
 [display]
 

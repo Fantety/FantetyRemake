@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://ck685deas71ll"]
+[gd_scene load_steps=42 format=3 uid="uid://ck685deas71ll"]
 
 [ext_resource type="Texture2D" uid="uid://tv08md68h2a" path="res://assets/img/fantety_tile.png" id="1_7ylkc"]
 [ext_resource type="Script" path="res://scenes/main/scripts/main.gd" id="1_tyiwk"]
@@ -327,6 +327,10 @@ size = Vector2(85, 42)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mvuaf"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_20y7t"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jme07"]
+
 [sub_resource type="Environment" id="Environment_0mfqa"]
 background_mode = 3
 glow_enabled = true
@@ -549,11 +553,25 @@ connected_door = NodePath("..")
 
 [node name="Area" type="Node2D" parent="Bedroom"]
 
-[node name="Bed" type="Area2D" parent="Bedroom/Area"]
+[node name="BedroomBed" type="Area2D" parent="Bedroom/Area"]
 position = Vector2(680.816, 83.6308)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Bedroom/Area/Bed"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bedroom/Area/BedroomBed"]
 shape = SubResource("RectangleShape2D_mvuaf")
+
+[node name="BedroomDesk" type="Area2D" parent="Bedroom/Area"]
+position = Vector2(529.416, 85.0021)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bedroom/Area/BedroomDesk"]
+position = Vector2(0.594604, 0.891907)
+shape = SubResource("RectangleShape2D_20y7t")
+
+[node name="BedroomTerminal" type="Area2D" parent="Bedroom/Area"]
+position = Vector2(416.276, 78.5545)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bedroom/Area/BedroomTerminal"]
+position = Vector2(-0.794609, -0.264862)
+shape = SubResource("RectangleShape2D_jme07")
 
 [node name="ElevatorA" type="Node2D" parent="."]
 
@@ -639,6 +657,3 @@ position = Vector2(625, 71)
 
 [node name="Elevator" parent="." instance=ExtResource("9_t8j3r")]
 position = Vector2(-98, 57)
-
-[connection signal="body_entered" from="Bedroom/Area/Bed" to="Bedroom" method="_on_bed_body_entered"]
-[connection signal="body_exited" from="Bedroom/Area/Bed" to="Bedroom" method="_on_bed_body_exited"]

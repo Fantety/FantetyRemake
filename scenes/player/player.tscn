@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dn6eh0qbbf3op"]
+[gd_scene load_steps=12 format=3 uid="uid://dn6eh0qbbf3op"]
 
 [ext_resource type="Script" path="res://scenes/player/scripts/player.gd" id="1_rjjqd"]
 [ext_resource type="SpriteFrames" uid="uid://bjtxu22oncavt" path="res://scenes/player/res/player.tres" id="2_q1bdl"]
@@ -11,6 +11,10 @@
 [ext_resource type="AudioStream" uid="uid://c368tm0k5yjbv" path="res://assets/sound/sprint.wav" id="9_a63ne"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yw8jv"]
+radius = 12.0
+height = 44.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hbclp"]
 radius = 12.0
 height = 44.0
 
@@ -62,3 +66,12 @@ bus = &"Effect"
 [node name="Sprint" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("9_a63ne")
 bus = &"Effect"
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 3)
+shape = SubResource("CapsuleShape2D_hbclp")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]
