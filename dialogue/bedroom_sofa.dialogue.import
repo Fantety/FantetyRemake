@@ -1,0 +1,14 @@
+[remap]
+
+importer="dialogue_manager_compiler_5"
+type="Resource"
+uid="uid://bfocxa37t8jy5"
+path="res://.godot/imported/bedroom_sofa.dialogue-67817de00db6ff92c05a8b937ca30a14.tres"
+
+[deps]
+
+source_file="res://dialogue/bedroom_sofa.dialogue"
+dest_files=["res://.godot/imported/bedroom_sofa.dialogue-67817de00db6ff92c05a8b937ca30a14.tres"]
+
+[params]
+

@@ -33,12 +33,12 @@ enum  DoorPermission{
 
 enum  DialogueType{
 	BEDROOM_BED_FIRST = 1,
-	BEDROOM_DESK_FIRST,
-	BEDROOM_TERMINAL_FIRST,
-	BEDROOM_SOFA_FIRST,
-	BEDROOM_TERMINAL_NORMAL_USE_WATER,
-	BEDROOM_TERMINAL_APRANCE_BROKEN_USE_WATER,
-	BEDROOM_TERMINAL_NORMAL_USE_SCREWDRIVER,
+	BEDROOM_DESK_FIRST = 2,
+	BEDROOM_TERMINAL_FIRST = 3,
+	BEDROOM_SOFA_FIRST = 4,
+	BEDROOM_TERMINAL_NORMAL_USE_WATER = 5,
+	BEDROOM_TERMINAL_APRANCE_BROKEN_USE_WATER = 6,
+	BEDROOM_TERMINAL_NORMAL_USE_SCREWDRIVER = 7,
 }
 
 var elevator_current_floor = 4
@@ -49,10 +49,11 @@ var player_permission = 0
 func show_tips(title,content):
 	get_tree().paused = true
 	var tip_bar = load("res://scenes/tips/tips.tscn").instantiate()
-	tip_bar.show_tips(title,content)
 	add_child(tip_bar)
-
-func show_progress_bar(title,duration):
+	tip_bar.show_tips(title,content)
+	
+func show_progress_bar(title,duration,dialogue_type):
 	var progress_bar = load("res://scenes/progress_bar/progress_bar.tscn").instantiate()
-	progress_bar.start_progress(title,duration)
 	add_child(progress_bar)
+	progress_bar.start_progress(title,duration,dialogue_type)
+	

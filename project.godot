@@ -22,6 +22,7 @@ DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 CommonDialogue="*res://common/common_dialogue.gd"
 CommonBackpack="*res://common/common_backpack.gd"
 CommonStatus="*res://common/common_status.gd"
+GlobalProgressBar="*res://scenes/progress_bar/progress_bar.tscn"
 
 [dialogue_editor]
 

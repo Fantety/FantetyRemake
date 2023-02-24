@@ -1,0 +1,6 @@
+~ start
+
+我: 一个很普通的大沙发，看起来软乎乎的
+- 翻找垫子
+	do on_dialogue_selected(Common.DialogueType.BEDROOM_SOFA_FIRST)
+- 离开 => END

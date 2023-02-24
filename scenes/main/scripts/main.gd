@@ -36,6 +36,9 @@ func show_area_dialogue(area_type):
 	elif area_type == Common.Areas.BEDROOM_TERMINAL:
 		var dialog = load("res://dialogue/bedroom_terminal.dialogue")
 		DialogueManager.show_example_dialogue_balloon(dialog,"start")
+	elif area_type == Common.Areas.BEDROOM_SOFA:
+		var dialog = load("res://dialogue/bedroom_sofa.dialogue")
+		DialogueManager.show_example_dialogue_balloon(dialog,"start")
 		pass
 	pass
 
@@ -50,4 +53,12 @@ func on_dialogue_selected(dialogue_type):
 	elif dialogue_type == Common.DialogueType.BEDROOM_TERMINAL_NORMAL_USE_WATER:
 		var dialogue_species = CommonDialogue.dialogue_dic["3"]
 		Common.show_tips(dialogue_species[0],dialogue_species[1])
+	elif dialogue_type == Common.DialogueType.BEDROOM_SOFA_FIRST:
+		var dialogue_species = CommonDialogue.dialogue_dic["4"]
+		Common.show_tips(dialogue_species[0],dialogue_species[1])
+		CommonBackpack.backpack["螺丝刀"] += 1
+	elif dialogue_type == Common.DialogueType.BEDROOM_TERMINAL_APRANCE_BROKEN_USE_WATER:
+		Common.show_progress_bar("正在向控制终端终灌水", 2, Common.DialogueType.BEDROOM_TERMINAL_APRANCE_BROKEN_USE_WATER)
+	elif dialogue_type == Common.DialogueType.BEDROOM_TERMINAL_NORMAL_USE_SCREWDRIVER:
+		Common.show_progress_bar("正在撬开控制终端", 3, Common.DialogueType.BEDROOM_TERMINAL_NORMAL_USE_SCREWDRIVER)
 	pass

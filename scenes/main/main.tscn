@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://ck685deas71ll"]
+[gd_scene load_steps=43 format=3 uid="uid://ck685deas71ll"]
 
 [ext_resource type="Texture2D" uid="uid://tv08md68h2a" path="res://assets/img/fantety_tile.png" id="1_7ylkc"]
 [ext_resource type="Script" path="res://scenes/main/scripts/main.gd" id="1_tyiwk"]
@@ -331,6 +331,9 @@ size = Vector2(85, 42)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jme07"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_30fei"]
+size = Vector2(23.3876, 20)
+
 [sub_resource type="Environment" id="Environment_0mfqa"]
 background_mode = 3
 glow_enabled = true
@@ -572,6 +575,13 @@ position = Vector2(416.276, 78.5545)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Bedroom/Area/BedroomTerminal"]
 position = Vector2(-0.794609, -0.264862)
 shape = SubResource("RectangleShape2D_jme07")
+
+[node name="BedroomSofa" type="Area2D" parent="Bedroom/Area"]
+position = Vector2(476.14, 85.4738)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bedroom/Area/BedroomSofa"]
+position = Vector2(2.16574, 0.471939)
+shape = SubResource("RectangleShape2D_30fei")
 
 [node name="ElevatorA" type="Node2D" parent="."]
 
