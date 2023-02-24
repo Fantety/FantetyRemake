@@ -51,14 +51,21 @@ func on_player_exit_area(area_name):
 
 func on_progress_finished(dialogue_type):
 	if dialogue_type == Common.DialogueType.BEDROOM_TERMINAL_NORMAL_USE_SCREWDRIVER:
-		CommonStatus.common_status["bedroom_terminal"] = CommonStatus.Status.APRANCE_BROKEN
-		CommonBackpack.backpack["螺丝刀"] -= 1
-		Common.show_tips("提示", "终端被敲开了一条裂缝")
+		Common.use_item("螺丝刀",Callable(self,"use_screwdriver"))
 		pass
 	elif dialogue_type == Common.DialogueType.BEDROOM_TERMINAL_APRANCE_BROKEN_USE_WATER:
-		CommonStatus.common_status["bedroom_terminal"] = CommonStatus.Status.INSIDE_BROKEN
-		CommonBackpack.backpack["装着水的杯子"] -= 1
-		$Door.is_stable = false
-		Common.show_tips("提示", "似乎线路被破坏了")
+		Common.use_item("装着水的杯子",Callable(self,"use_water"))
 		pass
 	pass
+
+
+func use_screwdriver():
+	CommonStatus.common_status["bedroom_terminal"] = CommonStatus.Status.APRANCE_BROKEN
+	Common.show_tips("提示", "终端被敲开了一条裂缝")
+	pass
+	
+func use_water():
+	CommonStatus.common_status["bedroom_terminal"] = CommonStatus.Status.INSIDE_BROKEN
+	$Door.is_stable = false
+	Common.show_tips("提示", "似乎线路被破坏了")
+	

@@ -1,6 +1,6 @@
 ~ start
 
 我: 一张很普通的桌子，上面有一杯水
-- 拿起杯子
+- 拿起杯子 [if item_acquisition_record["装着水的杯子"]==false]
 	do on_dialogue_selected(Common.DialogueType.BEDROOM_DESK_FIRST)
 - 离开 => END

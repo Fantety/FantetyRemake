@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://divw01xyxbdcd"]
+[gd_scene load_steps=11 format=3 uid="uid://divw01xyxbdcd"]
 
 [ext_resource type="Script" path="res://scenes/door/scripts/door.gd" id="1_3bkut"]
 [ext_resource type="SpriteFrames" uid="uid://bfdimsbwvol08" path="res://scenes/door/res/door_sprite_frames.tres" id="1_cwl13"]
 [ext_resource type="AudioStream" uid="uid://bxopwgh8jqh28" path="res://assets/sound/door.wav" id="3_5h2lw"]
+[ext_resource type="AudioStream" uid="uid://bdiahpd8ukss0" path="res://assets/sound/alarm.wav" id="4_v8ogo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ibyt8"]
 size = Vector2(16, 64)
@@ -122,6 +123,12 @@ bus = &"Effect"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SprintArea"]
 shape = SubResource("RectangleShape2D_drg2e")
+
+[node name="Alarm" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_v8ogo")
+max_distance = 500.0
+attenuation = 10.0
+bus = &"Effect"
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="body_entered" from="SprintArea" to="." method="_on_sprint_area_body_entered"]

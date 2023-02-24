@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://cs06d30iyxct4"]
+
+[ext_resource type="Texture2D" uid="uid://biu30j2g7qmya" path="res://assets/img/special_effect_board.png" id="1_gnrpl"]
+[ext_resource type="Script" path="res://scenes/ray/scripts/ray.gd" id="2_orqs0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lvvlh"]
+size = Vector2(1000, 997.403)
+
+[node name="Ray" type="PointLight2D"]
+position = Vector2(0, 0.0625002)
+scale = Vector2(0.002, 0.096125)
+color = Color(1, 0.462745, 0.419608, 1)
+energy = 1.5
+texture = ExtResource("1_gnrpl")
+script = ExtResource("2_orqs0")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-2.98023e-05, 7.43123e-06)
+shape = SubResource("RectangleShape2D_lvvlh")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

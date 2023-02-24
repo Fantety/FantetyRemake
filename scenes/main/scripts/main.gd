@@ -3,8 +3,15 @@ extends Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	var tween = create_tween().set_trans(Tween.TRANS_LINEAR)
+	tween.tween_property($WorldEnvironment,"environment:adjustment_brightness",1.0,2)
+	tween.play()
+	await tween.finished
+	Common.input_lock = false
 	CommonSignal.call_elevator_arrived.connect(Callable(self,"elevator_arrived_open_door"))
 	CommonSignal.call_show_dialogue.connect(Callable(self,"show_area_dialogue"))
+	CommonSignal.call_door_is_unstable.connect(Callable(self,"on_recv_door_unstable"))
+	CommonSignal.call_player_enter_ray.connect(Callable(self,"coma"))
 	pass # Replace with function body.
 
 
@@ -49,16 +56,34 @@ func on_dialogue_selected(dialogue_type):
 	elif dialogue_type == Common.DialogueType.BEDROOM_DESK_FIRST:
 		var dialogue_species = CommonDialogue.dialogue_dic["2"]
 		Common.show_tips(dialogue_species[0],dialogue_species[1])
-		CommonBackpack.backpack["装着水的杯子"] += 1
+		Common.acquire_item("装着水的杯子")
 	elif dialogue_type == Common.DialogueType.BEDROOM_TERMINAL_NORMAL_USE_WATER:
 		var dialogue_species = CommonDialogue.dialogue_dic["3"]
 		Common.show_tips(dialogue_species[0],dialogue_species[1])
 	elif dialogue_type == Common.DialogueType.BEDROOM_SOFA_FIRST:
 		var dialogue_species = CommonDialogue.dialogue_dic["4"]
 		Common.show_tips(dialogue_species[0],dialogue_species[1])
-		CommonBackpack.backpack["螺丝刀"] += 1
+		Common.acquire_item("螺丝刀")
 	elif dialogue_type == Common.DialogueType.BEDROOM_TERMINAL_APRANCE_BROKEN_USE_WATER:
-		Common.show_progress_bar("正在向控制终端终灌水", 2, Common.DialogueType.BEDROOM_TERMINAL_APRANCE_BROKEN_USE_WATER)
+		Common.show_progress_bar("正在向控制终端终灌水", 3, Common.DialogueType.BEDROOM_TERMINAL_APRANCE_BROKEN_USE_WATER)
 	elif dialogue_type == Common.DialogueType.BEDROOM_TERMINAL_NORMAL_USE_SCREWDRIVER:
-		Common.show_progress_bar("正在撬开控制终端", 3, Common.DialogueType.BEDROOM_TERMINAL_NORMAL_USE_SCREWDRIVER)
+		Common.show_progress_bar("正在撬开控制终端", 5, Common.DialogueType.BEDROOM_TERMINAL_NORMAL_USE_SCREWDRIVER)
+	pass
+
+
+func on_recv_door_unstable(door_idx):
+	if door_idx == Common.DoorIdx.BEDROOM:
+		$FixedLight/Bedroom/TopTapeLight.set_color(Color(0.8,0.3,0.3))
+		$FixedLight/Bedroom/ScreenLight.set_color(Color(0.8,0.3,0.3))
+		$BedroomOut/Rays.show()
+		pass
+	pass
+
+func coma():
+	Common.input_lock = true
+	var tween = create_tween().set_trans(Tween.TRANS_LINEAR)
+	tween.tween_property($WorldEnvironment,"environment:adjustment_brightness",0.0,2)
+	tween.play()
+	await tween.finished
+	get_tree().reload_current_scene()
 	pass

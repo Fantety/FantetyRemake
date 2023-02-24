@@ -57,3 +57,15 @@ func show_progress_bar(title,duration,dialogue_type):
 	add_child(progress_bar)
 	progress_bar.start_progress(title,duration,dialogue_type)
 	
+func acquire_item(item_name):
+	CommonBackpack.backpack[item_name] += 1
+	CommonBackpack.item_acquisition_record[item_name] = true
+	pass
+
+func use_item(item_name, used_action:Callable):
+	if CommonBackpack.backpack[item_name] <= 0:
+		Common.show_tips("警告", "你的背包中没有此物品")
+	else:
+		CommonBackpack.backpack[item_name] -= 1
+		used_action.call()
+	pass

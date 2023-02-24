@@ -6,6 +6,8 @@ var door_status:bool = false
 var is_occured = false
 var is_stable = true
 
+var tick = 0.0
+var tick_count = 0.05
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -17,6 +19,17 @@ func set_door_idx(idx):
 	door_idx = idx
 func get_door_idx()->Common.DoorIdx:
 	return door_idx
+
+func _process(delta):
+	if tick > tick_count:
+		tick = 0.0
+		if !$Alarm.is_playing() and !is_stable:
+			CommonSignal.emit_signal("call_door_is_unstable",door_idx)
+			$Alarm.play()
+	else:
+		tick += delta
+	pass
+
 
 func change_door_status(idx, status):
 	if idx == door_idx && status != door_status:

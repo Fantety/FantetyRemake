@@ -1,0 +1,40 @@
+[gd_scene load_steps=2 format=3 uid="uid://c8aoni8tnqywj"]
+
+[ext_resource type="PackedScene" uid="uid://cs06d30iyxct4" path="res://scenes/ray/ray.tscn" id="1_ka86w"]
+
+[node name="Rays" type="Node2D"]
+
+[node name="Ray" parent="." instance=ExtResource("1_ka86w")]
+position = Vector2(0.759417, 24.2078)
+rotation = 0.02823
+scale = Vector2(0.000478899, 0.048401)
+
+[node name="Ray2" parent="." instance=ExtResource("1_ka86w")]
+position = Vector2(1.92474, 23.7307)
+rotation = 0.453756
+scale = Vector2(0.0004306, 0.0528243)
+
+[node name="Ray3" parent="." instance=ExtResource("1_ka86w")]
+position = Vector2(43.1645, 23.9829)
+rotation = 0.0509735
+scale = Vector2(0.000328152, 0.0480625)
+
+[node name="Ray6" parent="." instance=ExtResource("1_ka86w")]
+position = Vector2(64.1664, 24.0047)
+rotation = -0.0140098
+scale = Vector2(0.000332655, 0.0480625)
+
+[node name="Ray4" parent="." instance=ExtResource("1_ka86w")]
+position = Vector2(54.6579, 24.3302)
+rotation = -0.767792
+scale = Vector2(0.000407366, 0.0667363)
+
+[node name="Ray7" parent="." instance=ExtResource("1_ka86w")]
+position = Vector2(36.6533, 23.7482)
+rotation = -0.502068
+scale = Vector2(0.000371842, 0.0541254)
+
+[node name="Ray5" parent="." instance=ExtResource("1_ka86w")]
+position = Vector2(18.3423, 23.7882)
+rotation = 0.311577
+scale = Vector2(0.000509753, 0.050766)

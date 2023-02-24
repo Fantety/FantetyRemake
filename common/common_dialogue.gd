@@ -3,6 +3,8 @@ extends Node
 var dialogue_data = "res://assets/data/dialogue_data.json"
 var dialogue_dic:Dictionary
 
+
+
 func _ready():
 	var file = FileAccess.open(dialogue_data, FileAccess.READ)
 	if file == null:

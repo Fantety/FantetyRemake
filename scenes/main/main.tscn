@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://ck685deas71ll"]
+[gd_scene load_steps=44 format=3 uid="uid://ck685deas71ll"]
 
 [ext_resource type="Texture2D" uid="uid://tv08md68h2a" path="res://assets/img/fantety_tile.png" id="1_7ylkc"]
 [ext_resource type="Script" path="res://scenes/main/scripts/main.gd" id="1_tyiwk"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://dn6eh0qbbf3op" path="res://scenes/player/player.tscn" id="7_e2b6k"]
 [ext_resource type="Script" path="res://scenes/main/scripts/fourth_floor.gd" id="9_7i8eg"]
 [ext_resource type="PackedScene" uid="uid://dec7oyqkabwjl" path="res://scenes/elevator/elevator.tscn" id="9_t8j3r"]
+[ext_resource type="PackedScene" uid="uid://c8aoni8tnqywj" path="res://scenes/ray/rays.tscn" id="12_8yw8v"]
 [ext_resource type="Script" path="res://scenes/main/scripts/thrid_floor.gd" id="13_co0wt"]
 [ext_resource type="Script" path="res://scenes/main/scripts/second_floor.gd" id="14_fpp2k"]
 [ext_resource type="Script" path="res://scenes/main/scripts/first_floor.gd" id="15_qe061"]
@@ -346,7 +347,7 @@ glow_hdr_threshold = 0.9
 glow_hdr_scale = 1.13
 glow_hdr_luminance_cap = 49.16
 glow_map_strength = 0.99
-adjustment_saturation = 0.01
+adjustment_enabled = true
 
 [node name="Main" type="Node2D"]
 position = Vector2(-311, 77)
@@ -582,6 +583,13 @@ position = Vector2(476.14, 85.4738)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Bedroom/Area/BedroomSofa"]
 position = Vector2(2.16574, 0.471939)
 shape = SubResource("RectangleShape2D_30fei")
+
+[node name="BedroomOut" type="Node2D" parent="."]
+
+[node name="Rays" parent="BedroomOut" instance=ExtResource("12_8yw8v")]
+visible = false
+position = Vector2(132, -16)
+scale = Vector2(2.3, 2.3)
 
 [node name="ElevatorA" type="Node2D" parent="."]
 

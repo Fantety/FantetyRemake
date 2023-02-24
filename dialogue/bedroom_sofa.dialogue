@@ -1,6 +1,6 @@
 ~ start
 
 我: 一个很普通的大沙发，看起来软乎乎的
-- 翻找垫子
+- 翻找垫子 [if item_acquisition_record["螺丝刀"]==false]
 	do on_dialogue_selected(Common.DialogueType.BEDROOM_SOFA_FIRST)
 - 离开 => END
