@@ -1,5 +1,7 @@
 extends Node2D
 
+var tick = 0.0
+var tick_count = 0.01
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -73,17 +75,34 @@ func on_dialogue_selected(dialogue_type):
 
 func on_recv_door_unstable(door_idx):
 	if door_idx == Common.DoorIdx.BEDROOM:
-		$FixedLight/Bedroom/TopTapeLight.set_color(Color(0.8,0.3,0.3))
-		$FixedLight/Bedroom/ScreenLight.set_color(Color(0.8,0.3,0.3))
+		$FixedLight/TopTapeLight.set_color(Color(0.8,0.3,0.3))
+		$FixedLight/ScreenLight.set_color(Color(0.8,0.3,0.3))
 		$BedroomOut/Rays.show()
 		pass
 	pass
 
+func set_all_fixedlight_color(color):
+	for i in $FixedLight.get_children():
+		i.set_color(Color(0.8,0.3,0.3))
+	pass
+
+func _process(delta):
+	if CommonStatus.lab_status == CommonStatus.LabStatus.SERIOUS:
+		if !$AlarmSerious.is_playing():
+			$AlarmSerious.play()
+		if tick > tick_count:
+			set_all_fixedlight_color(Color(0.8,0.3,0.3))
+			tick += delta
+			if tick > 2*tick_count:
+				tick = 0.0
+		else:
+			tick += delta
+			set_all_fixedlight_color(Color(1,1,1))
+	pass
+
+
 func coma():
-	Common.input_lock = true
-	var tween = create_tween().set_trans(Tween.TRANS_LINEAR)
-	tween.tween_property($WorldEnvironment,"environment:adjustment_brightness",0.0,2)
-	tween.play()
-	await tween.finished
-	get_tree().reload_current_scene()
+	CommonStatus.lab_status = CommonStatus.LabStatus.SERIOUS
+	for i in range(1,9):
+		CommonSignal.emit_signal("call_change_door_status",i,false)
 	pass

@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://ck685deas71ll"]
+[gd_scene load_steps=45 format=3 uid="uid://ck685deas71ll"]
 
 [ext_resource type="Texture2D" uid="uid://tv08md68h2a" path="res://assets/img/fantety_tile.png" id="1_7ylkc"]
 [ext_resource type="Script" path="res://scenes/main/scripts/main.gd" id="1_tyiwk"]
@@ -18,6 +18,7 @@
 [ext_resource type="Script" path="res://scenes/main/scripts/thrid_floor.gd" id="13_co0wt"]
 [ext_resource type="Script" path="res://scenes/main/scripts/second_floor.gd" id="14_fpp2k"]
 [ext_resource type="Script" path="res://scenes/main/scripts/first_floor.gd" id="15_qe061"]
+[ext_resource type="AudioStream" uid="uid://dkfei1dmxgo0f" path="res://assets/sound/alarm_serious.wav" id="19_7uq5v"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_bxd6f"]
 polygon = PackedVector2Array(-16, -16, 16, -16, 16, 0, -16, 0)
@@ -455,30 +456,28 @@ shape = SubResource("RectangleShape2D_jxhuh")
 
 [node name="FixedLight" type="Node2D" parent="."]
 
-[node name="Bedroom" type="Node2D" parent="FixedLight"]
-
-[node name="TopTapeLight" type="PointLight2D" parent="FixedLight/Bedroom"]
+[node name="TopTapeLight" type="PointLight2D" parent="FixedLight"]
 position = Vector2(528.5, 5)
 scale = Vector2(0.383, 0.008)
 color = Color(0, 1, 1, 1)
 blend_mode = 2
 texture = ExtResource("2_r3uby")
 
-[node name="TopTapeLight2" type="PointLight2D" parent="FixedLight/Bedroom"]
+[node name="TopTapeLight2" type="PointLight2D" parent="FixedLight"]
 position = Vector2(136, 5)
 scale = Vector2(0.368, 0.008)
 color = Color(0, 1, 1, 1)
 blend_mode = 2
 texture = ExtResource("2_r3uby")
 
-[node name="TopTapeLight3" type="PointLight2D" parent="FixedLight/Bedroom"]
+[node name="TopTapeLight3" type="PointLight2D" parent="FixedLight"]
 position = Vector2(-264, 5)
 scale = Vector2(0.24, 0.008)
 color = Color(0, 1, 1, 1)
 blend_mode = 2
 texture = ExtResource("2_r3uby")
 
-[node name="ScreenLight" type="PointLight2D" parent="FixedLight/Bedroom"]
+[node name="ScreenLight" type="PointLight2D" parent="FixedLight"]
 position = Vector2(416, 79.5)
 scale = Vector2(0.03, 0.013)
 color = Color(0, 1, 1, 1)
@@ -486,7 +485,7 @@ energy = 0.9
 blend_mode = 2
 texture = ExtResource("2_r3uby")
 
-[node name="PhotoLight" type="PointLight2D" parent="FixedLight/Bedroom"]
+[node name="PhotoLight" type="PointLight2D" parent="FixedLight"]
 position = Vector2(640, 48)
 scale = Vector2(0.0639999, 0.032)
 color = Color(0, 0.737255, 1, 1)
@@ -496,14 +495,14 @@ shadow_enabled = true
 shadow_item_cull_mask = 8
 texture = ExtResource("2_r3uby")
 
-[node name="BedLight1" type="PointLight2D" parent="FixedLight/Bedroom"]
+[node name="BedLight1" type="PointLight2D" parent="FixedLight"]
 position = Vector2(657.5, 93)
 scale = Vector2(0.017, 0.002)
 color = Color(0, 1, 1, 1)
 blend_mode = 2
 texture = ExtResource("2_r3uby")
 
-[node name="BedLight2" type="PointLight2D" parent="FixedLight/Bedroom"]
+[node name="BedLight2" type="PointLight2D" parent="FixedLight"]
 position = Vector2(686, 93)
 scale = Vector2(0.017, 0.002)
 color = Color(0, 1, 1, 1)
@@ -521,7 +520,6 @@ visibility_layer = 3
 position = Vector2(529, 17)
 scale = Vector2(0.510763, 0.15393)
 shadow_enabled = true
-shadow_item_cull_mask = 7
 texture = ExtResource("3_1067c")
 offset = Vector2(-8.8103, 399.532)
 
@@ -665,7 +663,7 @@ position = Vector2(-23, 2)
 connected_door = NodePath("..")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-color = Color(0.0980392, 0.0980392, 0.0980392, 1)
+color = Color(0.101961, 0.101961, 0.101961, 1)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_0mfqa")
@@ -675,3 +673,8 @@ position = Vector2(625, 71)
 
 [node name="Elevator" parent="." instance=ExtResource("9_t8j3r")]
 position = Vector2(-98, 57)
+
+[node name="AlarmSerious" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(-98, -14)
+stream = ExtResource("19_7uq5v")
+max_distance = 1000.0

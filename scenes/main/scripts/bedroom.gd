@@ -14,7 +14,6 @@ func _ready():
 	pass # Replace with function body.
 
 func _process(delta):
-
 	if tick > tick_count:
 		tick = 0.0
 		if CommonStatus.common_status["bedroom_terminal"] == CommonStatus.Status.INSIDE_BROKEN:
@@ -67,5 +66,4 @@ func use_screwdriver():
 func use_water():
 	CommonStatus.common_status["bedroom_terminal"] = CommonStatus.Status.INSIDE_BROKEN
 	$Door.is_stable = false
-	Common.show_tips("提示", "似乎线路被破坏了")
 	

@@ -9,7 +9,6 @@ signal bridge_get_next_dialogue_line_completed(line)
 
 const DialogueConstants = preload("res://addons/dialogue_manager/constants.gd")
 const DialogueSettings = preload("res://addons/dialogue_manager/components/settings.gd")
-const DialogueParser = preload("res://addons/dialogue_manager/components/parser.gd")
 const DialogueLine = preload("res://addons/dialogue_manager/dialogue_line.gd")
 const DialogueResponse = preload("res://addons/dialogue_manager/dialogue_response.gd")
 
@@ -40,7 +39,7 @@ func _ready() -> void:
 	
 	# Add any other state shortcuts from settings
 	for node_name in DialogueSettings.get_setting("states", []):
-		var state: Node = get_node("/root/" + node_name)
+		var state: Node = get_node_or_null("/root/" + node_name)
 		if state:
 			game_states.append(state)
 	
@@ -49,10 +48,10 @@ func _ready() -> void:
 
 
 ## Step through lines and run any mutations until we either hit some dialogue or the end of the conversation
-func get_next_dialogue_line(resource: Resource, key: String = "0", extra_game_states: Array = []) -> DialogueLine:
+func get_next_dialogue_line(resource: DialogueResource, key: String = "0", extra_game_states: Array = []) -> DialogueLine:
 	# You have to provide a valid dialogue resource
 	assert(resource != null, "No dialogue resource provided")
-	assert(resource.get_meta("lines").size() > 0, "Dialogue file has no content.")
+	assert(resource.lines.size() > 0, "Dialogue file has no content.")
 	
 	var dialogue: DialogueLine = await get_line(resource, key, extra_game_states)
 	
@@ -97,9 +96,9 @@ func get_resolved_text(text: String, replacements: Array, extra_game_states: Arr
 
 ## Generate a dialogue resource on the fly from some text
 func create_resource_from_text(text: String) -> Resource:
-	var parser: DialogueParser = DialogueParser.new()
+	var parser: DialogueManagerParser = DialogueManagerParser.new()
 	parser.parse(text)
-	var results: Dictionary = parser.get_data()
+	var results: DialogueManagerParseResult = parser.get_data()
 	var errors: Array[Dictionary] = parser.get_errors()
 	parser.free()
 	
@@ -109,7 +108,7 @@ func create_resource_from_text(text: String) -> Resource:
 			printerr("Line %d: %s" % [error.line_number + 1, DialogueConstants.get_error_message(error.error)])
 		assert(false, "You have errors in your dialogue text. See Output for details.")
 	
-	var resource: Resource = Resource.new()
+	var resource: DialogueResource = DialogueResource.new()
 	resource.set_meta("titles", results.titles)
 	resource.set_meta("lines", results.lines)
 	
@@ -117,11 +116,11 @@ func create_resource_from_text(text: String) -> Resource:
 
 
 ## Show the example balloon
-func show_example_dialogue_balloon(resource: Resource, title: String = "0", extra_game_states: Array = []) -> void:
+func show_example_dialogue_balloon(resource: DialogueResource, title: String = "0", extra_game_states: Array = []) -> void:
 	var ExampleBalloonScene = load("res://addons/dialogue_manager/example_balloon/example_balloon.tscn")
 	var SmallExampleBalloonScene = load("res://addons/dialogue_manager/example_balloon/small_example_balloon.tscn")
 	
-	var is_small_window: bool = ProjectSettings.get_setting("display/window/size/viewport_width") <= 400
+	var is_small_window: bool = ProjectSettings.get_setting("display/window/size/viewport_width") > 0
 	var balloon: Node = (SmallExampleBalloonScene if is_small_window else ExampleBalloonScene).instantiate()
 	get_tree().current_scene.add_child(balloon)
 	balloon.start(resource, title, extra_game_states)
@@ -130,7 +129,7 @@ func show_example_dialogue_balloon(resource: Resource, title: String = "0", extr
 ### Dotnet bridge
 
 
-func _bridge_get_next_dialogue_line(resource: Resource, key: String, extra_game_states: Array = []) -> void:
+func _bridge_get_next_dialogue_line(resource: DialogueResource, key: String, extra_game_states: Array = []) -> void:
 	var line = await get_next_dialogue_line(resource, key, extra_game_states)
 	emit_signal("bridge_get_next_dialogue_line_completed", line)
 
@@ -139,7 +138,7 @@ func _bridge_get_next_dialogue_line(resource: Resource, key: String, extra_game_
 
 
 # Get a line by its ID
-func get_line(resource: Resource, key: String, extra_game_states: Array) -> DialogueLine:
+func get_line(resource: DialogueResource, key: String, extra_game_states: Array) -> DialogueLine:
 	key = key.strip_edges()
 	
 	# See if we were given a stack instead of just the one key
@@ -159,14 +158,14 @@ func get_line(resource: Resource, key: String, extra_game_states: Array) -> Dial
 	# See if it is a title
 	if key.begins_with("~ "):
 		key = key.substr(2)
-	if resource.get_meta("titles", {}).has(key):
-		key = resource.get_meta("titles").get(key)
+	if resource.titles.has(key):
+		key = resource.titles.get(key)
 	
 	# Key not found, just use the first title
-	if not resource.get_meta("lines").has(key):
-		key = resource.get_meta("first_title")
+	if not resource.lines.has(key):
+		key = resource.first_title
 	
-	var data: Dictionary = resource.get_meta("lines").get(key)
+	var data: Dictionary = resource.lines.get(key)
 	
 	# Check for weighted random lines
 	if data.has("siblings"):
@@ -174,7 +173,7 @@ func get_line(resource: Resource, key: String, extra_game_states: Array) -> Dial
 		var cummulative_weight = 0
 		for sibling in data.siblings:
 			if result < cummulative_weight + sibling.weight:
-				data = resource.get_meta("lines").get(sibling.id)
+				data = resource.lines.get(sibling.id)
 				break
 			else:
 				cummulative_weight += sibling.weight
@@ -202,8 +201,8 @@ func get_line(resource: Resource, key: String, extra_game_states: Array) -> Dial
 		return line
 	
 	# Inject the next node's responses if they have any
-	if resource.get_meta("lines").has(line.next_id):
-		var next_line: Dictionary = resource.get_meta("lines").get(line.next_id)
+	if resource.lines.has(line.next_id):
+		var next_line: Dictionary = resource.lines.get(line.next_id)
 		if next_line != null and next_line.type == DialogueConstants.TYPE_RESPONSE:
 			line.responses = await get_responses(next_line.responses, resource, id_trail, extra_game_states)
 	
@@ -211,15 +210,24 @@ func get_line(resource: Resource, key: String, extra_game_states: Array) -> Dial
 	return line
 
 
+# Translate a string
+func translate(data: Dictionary) -> String:
+	if not auto_translate:
+		return data.text
+	
+	if data.translation_key == "" or data.translation_key == data.text:
+		return tr(data.text)
+	else:
+		return tr(data.translation_key, StringName(data.text))
+
+
 # Create a line of dialogue
 func create_dialogue_line(data: Dictionary, extra_game_states: Array) -> DialogueLine:
 	match data.type:
 		DialogueConstants.TYPE_DIALOGUE:
 			# Our bbcodes need to be process after text has been resolved so that the markers are at the correct index
-			var text = await get_resolved_text(tr(data.translation_key) if auto_translate else data.text, data.text_replacements, extra_game_states)
-			var parser = DialogueParser.new()
-			var markers = parser.extract_markers(text)
-			parser.free()
+			var text: String = await get_resolved_text(translate(data), data.text_replacements, extra_game_states)
+			var markers: Dictionary = DialogueManagerParser.extract_markers_from_string(text)
 			
 			return DialogueLine.new({
 				type = DialogueConstants.TYPE_DIALOGUE,
@@ -260,7 +268,7 @@ func create_response(data: Dictionary, extra_game_states: Array) -> DialogueResp
 		type = DialogueConstants.TYPE_RESPONSE,
 		next_id = data.next_id,
 		is_allowed = await check_condition(data, extra_game_states),
-		text = await get_resolved_text(tr(data.translation_key) if auto_translate else data.text, data.text_replacements, extra_game_states),
+		text = await get_resolved_text(translate(data), data.text_replacements, extra_game_states),
 		text_replacements = data.text_replacements,
 		translation_key = data.translation_key
 	})
@@ -271,7 +279,7 @@ func get_game_states(extra_game_states: Array) -> Array:
 	var current_scene: Node = get_tree().current_scene
 	var unique_states: Array = []
 	for state in extra_game_states + [current_scene] + game_states:
-		if not unique_states.has(state):
+		if state != null and not unique_states.has(state):
 			unique_states.append(state)
 	return unique_states
 
@@ -285,7 +293,7 @@ func check_condition(data: Dictionary, extra_game_states: Array) -> bool:
 
 
 # Make a change to game state or run a method
-func mutate(mutation: Dictionary, extra_game_states: Array) -> void:
+func mutate(mutation: Dictionary, extra_game_states: Array, is_inline_mutation: bool = false) -> void:
 	var expression: Array[Dictionary] = mutation.expression
 	
 	# Handle built in mutations
@@ -330,7 +338,7 @@ func mutate(mutation: Dictionary, extra_game_states: Array) -> void:
 	
 	# Or pass through to the resolver
 	else:
-		if not mutation_contains_assignment(mutation.expression):
+		if not mutation_contains_assignment(mutation.expression) and not is_inline_mutation:
 			emit_signal("mutation")
 		
 		await resolve(mutation.expression.duplicate(true), extra_game_states)
@@ -355,10 +363,10 @@ func resolve_each(array: Array, extra_game_states: Array) -> Array:
 
 
 # Replace an array of line IDs with their response prompts
-func get_responses(ids: Array, resource: Resource, id_trail: String, extra_game_states: Array) -> Array[DialogueResponse]:
+func get_responses(ids: Array, resource: DialogueResource, id_trail: String, extra_game_states: Array) -> Array[DialogueResponse]:
 	var responses: Array[DialogueResponse] = []
 	for id in ids:
-		var data: Dictionary = resource.get_meta("lines").get(id)
+		var data: Dictionary = resource.lines.get(id)
 		if DialogueSettings.get_setting("include_all_responses", false) or await check_condition(data, extra_game_states):
 			var response: DialogueResponse = await create_response(data, extra_game_states)
 			response.next_id += id_trail

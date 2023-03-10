@@ -18,11 +18,11 @@ config/icon="res://icon.svg"
 
 CommonSignal="*res://common/common_signal.gd"
 Common="*res://common/common.gd"
-DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 CommonDialogue="*res://common/common_dialogue.gd"
 CommonBackpack="*res://common/common_backpack.gd"
 CommonStatus="*res://common/common_status.gd"
 GlobalProgressBar="*res://scenes/progress_bar/progress_bar.tscn"
+DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 
 [dialogue_editor]
 
@@ -30,7 +30,7 @@ dialogues_selected_dialogue="051cdb27-6007-4dfc-a0e8-f7617f4a5dd0"
 
 [dialogue_manager]
 
-states=["CommonBackpack", "CommonStatus"]
+general/states=["CommonBackpack", "CommonStatus"]
 
 [display]
 
@@ -81,6 +81,10 @@ exit_tips={
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":82,"key_label":0,"unicode":114,"echo":false,"script":null)
 ]
 }
+
+[internationalization]
+
+locale/translations_pot_files=PackedStringArray("res://dialogue/bedroom_bed.dialogue", "res://dialogue/bedroom_desk.dialogue", "res://dialogue/bedroom_sofa.dialogue", "res://dialogue/bedroom_terminal.dialogue")
 
 [layer_names]
 

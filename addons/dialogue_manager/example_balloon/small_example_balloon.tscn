@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://addons/dialogue_manager/example_balloon/example_balloon.gd" id="1_4u26j"]
 [ext_resource type="PackedScene" uid="uid://ckvgyvclnwggo" path="res://addons/dialogue_manager/dialogue_label.tscn" id="2_a8ve6"]
-[ext_resource type="FontFile" uid="uid://dapnec1634ikd" path="res://assets/font/ChuangKeTieJinGangTi-2.otf" id="2_rvtac"]
+[ext_resource type="FontFile" uid="uid://dapnec1634ikd" path="res://assets/font/ChuangKeTieJinGangTi-2.otf" id="3_0sanc"]
 
 [sub_resource type="Theme" id="Theme_isg48"]
 default_font_size = 9
@@ -11,6 +11,7 @@ default_font_size = 9
 default_font_size = 9
 
 [sub_resource type="Theme" id="Theme_fakos"]
+default_font = ExtResource("3_0sanc")
 default_font_size = 9
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5d24i"]
@@ -55,7 +56,6 @@ modulate = Color(1, 1, 1, 0.501961)
 layout_mode = 2
 mouse_filter = 1
 theme = SubResource("Theme_isg48")
-theme_override_fonts/normal_font = ExtResource("2_rvtac")
 bbcode_enabled = true
 text = "Character"
 fit_content = true
@@ -64,19 +64,19 @@ scroll_active = false
 [node name="DialogueLabel" parent="Balloon/Margin/VBox" instance=ExtResource("2_a8ve6")]
 layout_mode = 2
 theme = SubResource("Theme_owda0")
-theme_override_fonts/normal_font = ExtResource("2_rvtac")
 text = "Dialogue"
 
 [node name="Responses" type="VBoxContainer" parent="Balloon/Margin/VBox"]
 layout_mode = 2
-theme_override_constants/separation = 1
+size_flags_vertical = 3
+theme_override_constants/separation = 3
 
 [node name="ResponseTemplate" type="RichTextLabel" parent="Balloon/Margin/VBox"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_vertical = 3
 focus_mode = 2
 theme = SubResource("Theme_fakos")
-theme_override_fonts/normal_font = ExtResource("2_rvtac")
 theme_override_styles/focus = SubResource("StyleBoxFlat_5d24i")
 theme_override_styles/normal = SubResource("StyleBoxFlat_oj3c8")
 bbcode_enabled = true
