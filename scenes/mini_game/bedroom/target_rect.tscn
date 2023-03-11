@@ -1,0 +1,58 @@
+[gd_scene load_steps=5 format=3 uid="uid://dpyjr6d5lo85o"]
+
+[ext_resource type="Script" path="res://scenes/mini_game/bedroom/scripts/target_rect.gd" id="1_lan4n"]
+[ext_resource type="AudioStream" uid="uid://co7xr1yf4lq3l" path="res://assets/sound/metal_button.wav" id="2_mmek6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tigu7"]
+
+[sub_resource type="Gradient" id="Gradient_y38aq"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[node name="TargetRect" type="ColorRect"]
+offset_right = 20.0
+offset_bottom = 20.0
+scale = Vector2(1e-05, 1e-05)
+pivot_offset = Vector2(10, 10)
+script = ExtResource("1_lan4n")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(10, 10)
+shape = SubResource("RectangleShape2D_tigu7")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+autostart = true
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 50
+one_shot = true
+explosiveness = 0.8
+emission_shape = 1
+emission_sphere_radius = 10.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 1000.0
+initial_velocity_max = 1000.0
+linear_accel_min = 100.0
+linear_accel_max = 100.0
+radial_accel_min = 100.0
+radial_accel_max = 100.0
+angle_max = 360.0
+scale_amount_min = 3.0
+scale_amount_max = 8.0
+color_ramp = SubResource("Gradient_y38aq")
+
+[node name="Timer2" type="Timer" parent="."]
+one_shot = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_mmek6")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="Timer2" to="." method="_on_timer_2_timeout"]

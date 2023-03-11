@@ -3,6 +3,7 @@
 我: 这似乎是某个控制终端，破坏它应该能达到目的
 - 撬开一条缝 [if backpack["螺丝刀"]>0] => choose_first
 - 灌入杯子里的水 [if backpack["装着水的杯子"]>0]  => choose_second
+- 显示的内容似乎不太一样了 [if CommonStatus.lab_status == CommonStatus.LabStatus.SERIOUS] => choose_third
 - 离开 => END
 
 ~ choose_first
@@ -18,3 +19,7 @@ if common_status["bedroom_terminal"] == Status.NORMAL
 elif common_status["bedroom_terminal"] == Status.APRANCE_BROKEN
 	do on_dialogue_selected(Common.DialogueType.BEDROOM_TERMINAL_APRANCE_BROKEN_USE_WATER)
 => END
+
+~ choose_third
+do on_dialogue_selected(Common.DialogueType.BEDROOM_TERMINAL_DIFFERENT)
+=>END

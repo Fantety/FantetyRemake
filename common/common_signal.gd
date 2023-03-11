@@ -15,3 +15,7 @@ signal call_player_enter_area(area_name)
 signal call_player_exit_area(area_name)
 signal call_door_is_unstable(door_idx)
 signal call_player_enter_ray()
+
+
+signal bedroom_mini_game_goal()
+signal bedroom_mini_game_finished()

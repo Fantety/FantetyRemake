@@ -14,6 +14,7 @@ func _ready():
 	CommonSignal.call_show_dialogue.connect(Callable(self,"show_area_dialogue"))
 	CommonSignal.call_door_is_unstable.connect(Callable(self,"on_recv_door_unstable"))
 	CommonSignal.call_player_enter_ray.connect(Callable(self,"coma"))
+	CommonSignal.bedroom_mini_game_finished.connect(Callable(self,"on_bedroom_mini_game_finished"))
 	pass # Replace with function body.
 
 
@@ -70,6 +71,10 @@ func on_dialogue_selected(dialogue_type):
 		Common.show_progress_bar("正在向控制终端终灌水", 3, Common.DialogueType.BEDROOM_TERMINAL_APRANCE_BROKEN_USE_WATER)
 	elif dialogue_type == Common.DialogueType.BEDROOM_TERMINAL_NORMAL_USE_SCREWDRIVER:
 		Common.show_progress_bar("正在撬开控制终端", 5, Common.DialogueType.BEDROOM_TERMINAL_NORMAL_USE_SCREWDRIVER)
+	elif dialogue_type == Common.DialogueType.BEDROOM_TERMINAL_DIFFERENT:
+		Common.input_lock = true
+		var bedroom_mini_game = load("res://scenes/mini_game/bedroom/bedroom_mini_game.tscn").instantiate()
+		add_child(bedroom_mini_game)
 	pass
 
 
@@ -105,4 +110,12 @@ func coma():
 	CommonStatus.lab_status = CommonStatus.LabStatus.SERIOUS
 	for i in range(1,9):
 		CommonSignal.emit_signal("call_change_door_status",i,false)
+	pass
+
+func on_bedroom_mini_game_finished():
+	CommonStatus.lab_status = CommonStatus.LabStatus.NORMAL
+	set_all_fixedlight_color(Color(1,1,1))
+	var dialogue_species = CommonDialogue.dialogue_dic["5"]
+	Common.player_permission = 1
+	Common.show_tips(dialogue_species[0],dialogue_species[1])
 	pass

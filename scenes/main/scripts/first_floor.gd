@@ -5,5 +5,7 @@ extends Node2D
 func _ready():
 	$Door.set_door_idx(Common.DoorIdx.ELEVATOR_FIRST_RIGHT)
 	$Door2.set_door_idx(Common.DoorIdx.ELEVATOR_FIRST_LEFT)
+	$Door/DoorCtrlIn.set_door_permission(Common.DoorPermission.ELEVATOR_ADMIT)
+	$Door2/DoorCtrlOut.set_door_permission(Common.DoorPermission.ELEVATOR_ADMIT)
 	pass # Replace with function body.
 

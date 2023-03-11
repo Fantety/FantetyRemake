@@ -63,7 +63,7 @@ func _on_texture_progress_bar_value_changed(value):
 	if value == 100:
 		$TextureProgressBar.hide()
 		$TextureProgressBar.set_value(0.0)
-		if door_permission < Common.player_permission:
+		if door_permission <= Common.player_permission:
 			if !$InputRight.is_playing():
 					$InputRight.play()
 			change_door()

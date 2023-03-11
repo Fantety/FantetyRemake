@@ -1,0 +1,7 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://c26seiibk78rc"]
+
+[ext_resource type="FontFile" uid="uid://dapnec1634ikd" path="res://assets/font/ChuangKeTieJinGangTi-2.otf" id="1_fcoih"]
+
+[resource]
+font = ExtResource("1_fcoih")
+font_size = 24
