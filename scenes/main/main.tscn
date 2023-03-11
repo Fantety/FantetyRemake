@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://ck685deas71ll"]
+[gd_scene load_steps=47 format=3 uid="uid://ck685deas71ll"]
 
 [ext_resource type="Texture2D" uid="uid://tv08md68h2a" path="res://assets/img/fantety_tile.png" id="1_7ylkc"]
 [ext_resource type="Script" path="res://scenes/main/scripts/main.gd" id="1_tyiwk"]
@@ -19,6 +19,7 @@
 [ext_resource type="Script" path="res://scenes/main/scripts/second_floor.gd" id="14_fpp2k"]
 [ext_resource type="Script" path="res://scenes/main/scripts/first_floor.gd" id="15_qe061"]
 [ext_resource type="AudioStream" uid="uid://dkfei1dmxgo0f" path="res://assets/sound/alarm_serious.wav" id="19_7uq5v"]
+[ext_resource type="Shader" path="res://scenes/main/shader/vertigo.gdshader" id="20_7swh7"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_bxd6f"]
 polygon = PackedVector2Array(-16, -16, 16, -16, 16, 0, -16, 0)
@@ -341,14 +342,18 @@ background_mode = 3
 glow_enabled = true
 glow_normalized = true
 glow_intensity = 3.02
-glow_strength = 0.91
-glow_bloom = 0.07
+glow_strength = 0.78
+glow_bloom = 0.1
 glow_blend_mode = 1
-glow_hdr_threshold = 0.9
+glow_hdr_threshold = 0.61
 glow_hdr_scale = 1.13
 glow_hdr_luminance_cap = 49.16
 glow_map_strength = 0.99
 adjustment_enabled = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_n1ftj"]
+shader = ExtResource("20_7swh7")
+shader_parameter/alpha = 0.8
 
 [node name="Main" type="Node2D"]
 position = Vector2(-311, 77)
@@ -669,7 +674,14 @@ color = Color(0.101961, 0.101961, 0.101961, 1)
 environment = SubResource("Environment_0mfqa")
 
 [node name="Player" parent="." instance=ExtResource("7_e2b6k")]
-position = Vector2(625, 71)
+position = Vector2(619, 70)
+
+[node name="Vertigo" type="Sprite2D" parent="Player"]
+z_index = 10
+material = SubResource("ShaderMaterial_n1ftj")
+position = Vector2(1, -35)
+scale = Vector2(0.338, 0.2)
+texture = ExtResource("2_r3uby")
 
 [node name="Elevator" parent="." instance=ExtResource("9_t8j3r")]
 position = Vector2(-98, 57)

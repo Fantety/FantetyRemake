@@ -3,7 +3,7 @@ extends CharacterBody2D
 
 var current_area = Common.Areas.NONE
 
-var speed =100.0
+var speed =50.0
 const JUMP_VELOCITY = -200.0
 
 var speed_limit = 200.0
@@ -21,8 +21,14 @@ func _ready():
 	CommonSignal.call_show_player_emo.connect(Callable(self,"show_player_emo"))
 	CommonSignal.call_hide_player_emo.connect(Callable(self,"hide_player_emo"))
 	CommonSignal.call_change_player_area.connect(Callable(self,"change_current_area"))
+	CommonSignal.call_set_player_speed_limit.connect(Callable(self,"set_speed_limit"))
+	CommonSignal.call_player_tinnitus.connect(Callable(self,"start_tinnitus"))
 
-
+func set_speed_limit(ispeed):
+	speed_limit = ispeed
+func start_tinnitus():
+	if !$Tinnitus.is_playing():
+		$Tinnitus.play()
 
 func _physics_process(delta):
 	if tick > tick_count:
@@ -80,7 +86,7 @@ func _physics_process(delta):
 			$AnimatedSprite2D.play("stand")
 			$RunSound.stop()
 			velocity.x = move_toward(velocity.x, 0, speed)
-			speed = 100.0
+			speed = 50.0
 			$AnimatedSprite2D.speed_scale = 1.0
 		move_and_slide()
 

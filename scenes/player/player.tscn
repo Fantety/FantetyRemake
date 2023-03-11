@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dn6eh0qbbf3op"]
+[gd_scene load_steps=13 format=3 uid="uid://dn6eh0qbbf3op"]
 
 [ext_resource type="Script" path="res://scenes/player/scripts/player.gd" id="1_rjjqd"]
 [ext_resource type="SpriteFrames" uid="uid://bjtxu22oncavt" path="res://scenes/player/res/player.tres" id="2_q1bdl"]
@@ -9,6 +9,7 @@
 [ext_resource type="AudioStream" uid="uid://wq7eg55mcyl5" path="res://assets/sound/run.wav" id="5_i38c2"]
 [ext_resource type="AudioStream" uid="uid://1j8k4rwbw2t" path="res://assets/sound/jump.wav" id="6_5emlw"]
 [ext_resource type="AudioStream" uid="uid://c368tm0k5yjbv" path="res://assets/sound/sprint.wav" id="9_a63ne"]
+[ext_resource type="AudioStream" uid="uid://c88s8rstg556c" path="res://assets/sound/tinnitus.wav" id="10_b665a"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yw8jv"]
 radius = 12.0
@@ -46,6 +47,7 @@ shape = SubResource("CapsuleShape2D_yw8jv")
 zoom = Vector2(1.5, 1.5)
 limit_top = 45
 limit_right = 425
+limit_bottom = 572
 position_smoothing_enabled = true
 script = ExtResource("3_422tv")
 
@@ -73,6 +75,9 @@ bus = &"Effect"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(0, 3)
 shape = SubResource("CapsuleShape2D_hbclp")
+
+[node name="Tinnitus" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_b665a")
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]

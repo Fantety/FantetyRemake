@@ -15,6 +15,10 @@ signal call_player_enter_area(area_name)
 signal call_player_exit_area(area_name)
 signal call_door_is_unstable(door_idx)
 signal call_player_enter_ray()
+signal call_start_elevator_plot()
+signal call_elevator_fallen()
+signal call_set_player_speed_limit(ispeed)
+signal call_player_tinnitus()
 
 
 signal bedroom_mini_game_goal()

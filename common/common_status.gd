@@ -5,6 +5,7 @@ enum LabStatus{
 	SERIOUS = 1,
 }
 var lab_status = LabStatus.NORMAL
+var elevator_plot_status = false
 
 enum Status{
 	NORMAL = 0,

@@ -5,6 +5,7 @@ var tick_count = 0.01
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	$Player/Vertigo.hide()
 	var tween = create_tween().set_trans(Tween.TRANS_LINEAR)
 	tween.tween_property($WorldEnvironment,"environment:adjustment_brightness",1.0,2)
 	tween.play()
@@ -15,6 +16,8 @@ func _ready():
 	CommonSignal.call_door_is_unstable.connect(Callable(self,"on_recv_door_unstable"))
 	CommonSignal.call_player_enter_ray.connect(Callable(self,"coma"))
 	CommonSignal.bedroom_mini_game_finished.connect(Callable(self,"on_bedroom_mini_game_finished"))
+	CommonSignal.call_start_elevator_plot.connect(Callable(self,"on_call_start_elevator_plot"))
+	CommonSignal.call_elevator_fallen.connect(Callable(self,"on_call_elevator_fallen"))
 	pass # Replace with function body.
 
 
@@ -118,4 +121,31 @@ func on_bedroom_mini_game_finished():
 	var dialogue_species = CommonDialogue.dialogue_dic["5"]
 	Common.player_permission = 1
 	Common.show_tips(dialogue_species[0],dialogue_species[1])
+	pass
+
+func on_call_start_elevator_plot():
+	var tween = create_tween().set_trans(Tween.TRANS_LINEAR)
+	tween.tween_property($WorldEnvironment.environment,"adjustment_saturation",0.01,1)
+	tween.play()
+	CommonSignal.emit_signal("call_reach_floor",1)
+	var tween1 = create_tween().set_trans(Tween.TRANS_QUAD)
+	tween1.tween_property($WorldEnvironment.environment,"adjustment_brightness",0.01,3.0)
+	tween1.play()
+	pass
+func on_call_elevator_fallen():
+	var tween1 = create_tween().set_trans(Tween.TRANS_LINEAR)
+	tween1.tween_property($WorldEnvironment.environment,"adjustment_brightness",1.0,1)
+	tween1.play()
+	var tween = create_tween().set_trans(Tween.TRANS_LINEAR)
+	tween.tween_property($WorldEnvironment.environment,"adjustment_saturation",1.0,1)
+	tween.play()
+	$Player/Vertigo.show()
+	CommonSignal.emit_signal("call_set_player_speed_limit",51)
+	CommonSignal.emit_signal("call_player_tinnitus")
+	CommonStatus.elevator_plot_status = true
+	var tween2 = create_tween().set_trans(Tween.TRANS_LINEAR)
+	tween2.tween_property($Player/Vertigo.material,"shader_parameter/alpha",0.0,12.5)
+	tween2.play()
+	await tween2.finished
+	$Player/Vertigo.hide()
 	pass

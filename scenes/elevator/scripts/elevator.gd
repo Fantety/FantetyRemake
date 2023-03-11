@@ -36,6 +36,17 @@ func do_reach_floor(floor):
 		CommonSignal.emit_signal("call_change_door_status",Common.DoorIdx.ELEVATOR_FIRST_LEFT,false)
 		CommonSignal.emit_signal("call_change_door_status",Common.DoorIdx.ELEVATOR_FIRST_RIGHT,false)
 		pass
+	if CommonStatus.elevator_plot_status == false:
+		var tween1 = create_tween().set_trans(Tween.TRANS_QUAD)
+		tween1.tween_property(self,"position:y",get_position().y+(4-1)*32*4,1)
+		$EleFall.play()
+		tween1.play()
+		await tween1.finished
+		$EleCollision.play()
+		CommonSignal.emit_signal("call_shake_camera",0.4)
+		CommonSignal.emit_signal("call_elevator_fallen")
+		Common.elevator_current_floor = 1
+		return
 	await $Timer.timeout
 	$AnimatedSprite2D.play()
 	$Start.play()
@@ -57,8 +68,13 @@ func do_reach_floor(floor):
 
 func _on_area_2d_body_entered(body):
 	if body.name == "Player":
+		if CommonStatus.elevator_plot_status == false:
+			CommonSignal.emit_signal("call_start_elevator_plot")
+			CommonSignal.emit_signal("call_show_player_emo", Common.EmoType.AMAZED)
+			pass
+		else:
+			CommonSignal.emit_signal("call_show_player_emo", Common.EmoType.DEFAULT)
 		is_in_self = true
-		CommonSignal.emit_signal("call_show_player_emo", Common.EmoType.DEFAULT)
 		pass
 	pass # Replace with function body.
 
