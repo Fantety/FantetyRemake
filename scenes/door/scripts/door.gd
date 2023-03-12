@@ -59,23 +59,12 @@ func _on_animation_player_animation_finished(anim_name):
 	pass # Replace with function body.
 
 func change_door_occured_status():
-	if get_door_idx()==Common.DoorIdx.BEDROOM:
-		is_occured = true
-
-func _on_sprint_area_body_entered(body):
-	if body.name == "Player" \
-	and is_occured == true \
+	is_occured = true
+	if is_occured == true \
 	and get_door_idx()==Common.DoorIdx.BEDROOM \
 	and !is_stable:
 		var collision_value = randi_range(0,9)
-		print_debug("[碰撞门",get_door_idx(), "]:", collision_value )
+		print("[碰撞门",get_door_idx(), "]:", collision_value )
 		if collision_value >= 6:
 			change_door_status(get_door_idx(),true)
 		is_occured = false
-	pass # Replace with function body.
-
-
-func _on_sprint_area_body_exited(body):
-	if body.name == "Player":
-		is_occured = false
-	pass # Replace with function body.

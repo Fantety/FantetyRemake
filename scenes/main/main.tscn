@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://ck685deas71ll"]
+[gd_scene load_steps=48 format=3 uid="uid://ck685deas71ll"]
 
 [ext_resource type="Texture2D" uid="uid://tv08md68h2a" path="res://assets/img/fantety_tile.png" id="1_7ylkc"]
 [ext_resource type="Script" path="res://scenes/main/scripts/main.gd" id="1_tyiwk"]
@@ -20,6 +20,7 @@
 [ext_resource type="Script" path="res://scenes/main/scripts/first_floor.gd" id="15_qe061"]
 [ext_resource type="AudioStream" uid="uid://dkfei1dmxgo0f" path="res://assets/sound/alarm_serious.wav" id="19_7uq5v"]
 [ext_resource type="Shader" path="res://scenes/main/shader/vertigo.gdshader" id="20_7swh7"]
+[ext_resource type="PackedScene" uid="uid://bdjps3qjsmv5d" path="res://scenes/LabJar/lab_jar.tscn" id="21_orfpf"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_bxd6f"]
 polygon = PackedVector2Array(-16, -16, 16, -16, 16, 0, -16, 0)
@@ -482,6 +483,48 @@ color = Color(0, 1, 1, 1)
 blend_mode = 2
 texture = ExtResource("2_r3uby")
 
+[node name="TopTapeLight4" type="PointLight2D" parent="FixedLight"]
+position = Vector2(-384.927, 133)
+scale = Vector2(0.481854, 0.00799999)
+color = Color(0.270588, 1, 1, 1)
+blend_mode = 2
+texture = ExtResource("2_r3uby")
+
+[node name="TopTapeLight6" type="PointLight2D" parent="FixedLight"]
+position = Vector2(-384, 261)
+scale = Vector2(0.481854, 0.00799999)
+color = Color(0.270588, 1, 1, 1)
+blend_mode = 2
+texture = ExtResource("2_r3uby")
+
+[node name="TopTapeLight7" type="PointLight2D" parent="FixedLight"]
+position = Vector2(-385, 389)
+scale = Vector2(0.481854, 0.00799999)
+color = Color(0.270588, 1, 1, 1)
+blend_mode = 2
+texture = ExtResource("2_r3uby")
+
+[node name="TopTapeLight5" type="PointLight2D" parent="FixedLight"]
+position = Vector2(336, 133)
+scale = Vector2(0.768927, 0.00799999)
+color = Color(0.270588, 1, 1, 1)
+blend_mode = 2
+texture = ExtResource("2_r3uby")
+
+[node name="TopTapeLight8" type="PointLight2D" parent="FixedLight"]
+position = Vector2(336, 261)
+scale = Vector2(0.768927, 0.00799999)
+color = Color(0.270588, 1, 1, 1)
+blend_mode = 2
+texture = ExtResource("2_r3uby")
+
+[node name="TopTapeLight9" type="PointLight2D" parent="FixedLight"]
+position = Vector2(336, 389)
+scale = Vector2(0.768927, 0.00799999)
+color = Color(0.270588, 1, 1, 1)
+blend_mode = 2
+texture = ExtResource("2_r3uby")
+
 [node name="ScreenLight" type="PointLight2D" parent="FixedLight"]
 position = Vector2(416, 79.5)
 scale = Vector2(0.03, 0.013)
@@ -690,3 +733,39 @@ position = Vector2(-98, 57)
 position = Vector2(-98, -14)
 stream = ExtResource("19_7uq5v")
 max_distance = 1000.0
+
+[node name="FantetyLab" type="Node2D" parent="."]
+position = Vector2(618, -11)
+
+[node name="LabJar" parent="FantetyLab" instance=ExtResource("21_orfpf")]
+position = Vector2(-568, 457)
+
+[node name="LabJar2" parent="FantetyLab" instance=ExtResource("21_orfpf")]
+position = Vector2(-504, 457)
+
+[node name="LabJar3" parent="FantetyLab" instance=ExtResource("21_orfpf")]
+position = Vector2(-439, 458)
+
+[node name="LabJar4" parent="FantetyLab" instance=ExtResource("21_orfpf")]
+position = Vector2(-375, 458)
+
+[node name="LabJar5" parent="FantetyLab" instance=ExtResource("21_orfpf")]
+position = Vector2(-311, 457)
+
+[node name="LabJar6" parent="FantetyLab" instance=ExtResource("21_orfpf")]
+position = Vector2(-245, 457)
+
+[node name="LabJar8" parent="FantetyLab" instance=ExtResource("21_orfpf")]
+position = Vector2(-184, 457)
+
+[node name="LabJar9" parent="FantetyLab" instance=ExtResource("21_orfpf")]
+position = Vector2(-119, 458)
+
+[node name="LabJar10" parent="FantetyLab" instance=ExtResource("21_orfpf")]
+position = Vector2(-54.9999, 458)
+
+[node name="LabJar11" parent="FantetyLab" instance=ExtResource("21_orfpf")]
+position = Vector2(9, 457)
+
+[node name="LabJar12" parent="FantetyLab" instance=ExtResource("21_orfpf")]
+position = Vector2(75, 457)

@@ -44,7 +44,7 @@ enum  DialogueType{
 
 var elevator_current_floor = 4
 var input_lock = false
-var player_permission = 999
+var player_permission = 0
 
 
 func show_tips(title,content):

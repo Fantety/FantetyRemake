@@ -22,4 +22,4 @@ elif common_status["bedroom_terminal"] == Status.APRANCE_BROKEN
 
 ~ choose_third
 do on_dialogue_selected(Common.DialogueType.BEDROOM_TERMINAL_DIFFERENT)
-=>END
+=> END

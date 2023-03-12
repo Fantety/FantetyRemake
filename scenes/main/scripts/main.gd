@@ -117,6 +117,7 @@ func coma():
 
 func on_bedroom_mini_game_finished():
 	CommonStatus.lab_status = CommonStatus.LabStatus.NORMAL
+	$AlarmSerious.stop()
 	set_all_fixedlight_color(Color(1,1,1))
 	var dialogue_species = CommonDialogue.dialogue_dic["5"]
 	Common.player_permission = 1
@@ -132,6 +133,8 @@ func on_call_start_elevator_plot():
 	tween1.tween_property($WorldEnvironment.environment,"adjustment_brightness",0.01,3.0)
 	tween1.play()
 	pass
+	
+
 func on_call_elevator_fallen():
 	var tween1 = create_tween().set_trans(Tween.TRANS_LINEAR)
 	tween1.tween_property($WorldEnvironment.environment,"adjustment_brightness",1.0,1)
@@ -142,6 +145,9 @@ func on_call_elevator_fallen():
 	$Player/Vertigo.show()
 	CommonSignal.emit_signal("call_set_player_speed_limit",51)
 	CommonSignal.emit_signal("call_player_tinnitus")
+	CommonSignal.emit_signal("call_change_door_status",Common.DoorIdx.ELEVATOR_FIRST_LEFT,true)
+	CommonSignal.emit_signal("call_change_door_status",Common.DoorIdx.ELEVATOR_FIRST_RIGHT,true)
+	CommonSignal.emit_signal("call_change_elevator_monitoring_status",false)
 	CommonStatus.elevator_plot_status = true
 	var tween2 = create_tween().set_trans(Tween.TRANS_LINEAR)
 	tween2.tween_property($Player/Vertigo.material,"shader_parameter/alpha",0.0,12.5)

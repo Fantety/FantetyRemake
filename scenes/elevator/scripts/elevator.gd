@@ -6,6 +6,7 @@ var elevator_ctrl_ui = load("res://scenes/elevator/elevator_ctrl.tscn")
 func _ready():
 	$Lights/PointLight2D.set_color(Color(0,1,1,1))
 	CommonSignal.call_reach_floor.connect(Callable(self,"do_reach_floor"))
+	CommonSignal.call_change_elevator_monitoring_status.connect(Callable(self,"change_elevator_monitoring_status"))
 	pass # Replace with function body.
 
 
@@ -36,6 +37,7 @@ func do_reach_floor(floor):
 		CommonSignal.emit_signal("call_change_door_status",Common.DoorIdx.ELEVATOR_FIRST_LEFT,false)
 		CommonSignal.emit_signal("call_change_door_status",Common.DoorIdx.ELEVATOR_FIRST_RIGHT,false)
 		pass
+	await $Timer.timeout
 	if CommonStatus.elevator_plot_status == false:
 		var tween1 = create_tween().set_trans(Tween.TRANS_QUAD)
 		tween1.tween_property(self,"position:y",get_position().y+(4-1)*32*4,1)
@@ -47,7 +49,6 @@ func do_reach_floor(floor):
 		CommonSignal.emit_signal("call_elevator_fallen")
 		Common.elevator_current_floor = 1
 		return
-	await $Timer.timeout
 	$AnimatedSprite2D.play()
 	$Start.play()
 	$Lights/PointLight2D.set_color(Color(1,0,0.5,1))
@@ -97,3 +98,7 @@ func _on_area_2d_area_entered(area):
 		$AnimatedSprite2D/AnimatedSprite2D.set_frame(0)
 		pass
 	pass # Replace with function body.
+
+func change_elevator_monitoring_status(status):
+	$Area2D.set_monitoring(status)
+	pass

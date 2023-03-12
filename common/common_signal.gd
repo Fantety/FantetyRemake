@@ -19,6 +19,7 @@ signal call_start_elevator_plot()
 signal call_elevator_fallen()
 signal call_set_player_speed_limit(ispeed)
 signal call_player_tinnitus()
+signal call_change_elevator_monitoring_status(status)
 
 
 signal bedroom_mini_game_goal()
