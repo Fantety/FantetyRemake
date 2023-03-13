@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://ck685deas71ll"]
+[gd_scene load_steps=49 format=3 uid="uid://ck685deas71ll"]
 
 [ext_resource type="Texture2D" uid="uid://tv08md68h2a" path="res://assets/img/fantety_tile.png" id="1_7ylkc"]
 [ext_resource type="Script" path="res://scenes/main/scripts/main.gd" id="1_tyiwk"]
@@ -21,6 +21,7 @@
 [ext_resource type="AudioStream" uid="uid://dkfei1dmxgo0f" path="res://assets/sound/alarm_serious.wav" id="19_7uq5v"]
 [ext_resource type="Shader" path="res://scenes/main/shader/vertigo.gdshader" id="20_7swh7"]
 [ext_resource type="PackedScene" uid="uid://bdjps3qjsmv5d" path="res://scenes/LabJar/lab_jar.tscn" id="21_orfpf"]
+[ext_resource type="PackedScene" uid="uid://c8ktef65n61xn" path="res://scenes/LabJar/lab_jar_broken.tscn" id="22_50aj6"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_bxd6f"]
 polygon = PackedVector2Array(-16, -16, 16, -16, 16, 0, -16, 0)
@@ -737,7 +738,7 @@ max_distance = 1000.0
 [node name="FantetyLab" type="Node2D" parent="."]
 position = Vector2(618, -11)
 
-[node name="LabJar" parent="FantetyLab" instance=ExtResource("21_orfpf")]
+[node name="LabJar1" parent="FantetyLab" instance=ExtResource("21_orfpf")]
 position = Vector2(-568, 457)
 
 [node name="LabJar2" parent="FantetyLab" instance=ExtResource("21_orfpf")]
@@ -749,23 +750,23 @@ position = Vector2(-439, 458)
 [node name="LabJar4" parent="FantetyLab" instance=ExtResource("21_orfpf")]
 position = Vector2(-375, 458)
 
-[node name="LabJar5" parent="FantetyLab" instance=ExtResource("21_orfpf")]
-position = Vector2(-311, 457)
-
 [node name="LabJar6" parent="FantetyLab" instance=ExtResource("21_orfpf")]
 position = Vector2(-245, 457)
 
-[node name="LabJar8" parent="FantetyLab" instance=ExtResource("21_orfpf")]
+[node name="LabJar7" parent="FantetyLab" instance=ExtResource("21_orfpf")]
 position = Vector2(-184, 457)
 
-[node name="LabJar9" parent="FantetyLab" instance=ExtResource("21_orfpf")]
+[node name="LabJar8" parent="FantetyLab" instance=ExtResource("21_orfpf")]
 position = Vector2(-119, 458)
 
-[node name="LabJar10" parent="FantetyLab" instance=ExtResource("21_orfpf")]
+[node name="LabJar9" parent="FantetyLab" instance=ExtResource("21_orfpf")]
 position = Vector2(-54.9999, 458)
 
-[node name="LabJar11" parent="FantetyLab" instance=ExtResource("21_orfpf")]
+[node name="LabJar10" parent="FantetyLab" instance=ExtResource("21_orfpf")]
 position = Vector2(9, 457)
 
-[node name="LabJar12" parent="FantetyLab" instance=ExtResource("21_orfpf")]
+[node name="LabJar11" parent="FantetyLab" instance=ExtResource("21_orfpf")]
 position = Vector2(75, 457)
+
+[node name="LabJarBroken" parent="FantetyLab" instance=ExtResource("22_50aj6")]
+position = Vector2(-309, 457)

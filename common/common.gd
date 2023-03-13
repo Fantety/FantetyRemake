@@ -23,6 +23,17 @@ enum Areas{
 	BEDROOM_DESK,
 	BEDROOM_TERMINAL,
 	BEDROOM_SOFA,
+	LAB_JAR1,
+	LAB_JAR2,
+	LAB_JAR3,
+	LAB_JAR4,
+	LAB_JAR6,
+	LAB_JAR7,
+	LAB_JAR8,
+	LAB_JAR9,
+	LAB_JAR10,
+	LAB_JAR11,
+	LAB_JAR_BROKEN,
 }
 
 enum  DoorPermission{
@@ -45,6 +56,8 @@ enum  DialogueType{
 var elevator_current_floor = 4
 var input_lock = false
 var player_permission = 0
+
+var current_lab_jar_num = 0
 
 
 func show_tips(title,content):

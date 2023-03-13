@@ -52,7 +52,9 @@ func show_area_dialogue(area_type):
 	elif area_type == Common.Areas.BEDROOM_SOFA:
 		var dialog = load("res://dialogue/bedroom_sofa.dialogue")
 		DialogueManager.show_example_dialogue_balloon(dialog,"start")
-		pass
+	elif area_type >= Common.Areas.LAB_JAR1 and area_type <= Common.Areas.LAB_JAR11:
+		var dialog = load("res://dialogue/lab_jar.dialogue")
+		DialogueManager.show_example_dialogue_balloon(dialog,"start")
 	pass
 
 func on_dialogue_selected(dialogue_type):
