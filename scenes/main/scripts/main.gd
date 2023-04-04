@@ -41,11 +41,9 @@ func show_area_dialogue(area_type):
 	if area_type == Common.Areas.BEDROOM_BED:
 		var dialog = load("res://dialogue/bedroom_bed.dialogue")
 		DialogueManager.show_example_dialogue_balloon(dialog,"start")
-		pass
 	elif area_type == Common.Areas.BEDROOM_DESK:
 		var dialog = load("res://dialogue/bedroom_desk.dialogue")
 		DialogueManager.show_example_dialogue_balloon(dialog,"start")
-		pass
 	elif area_type == Common.Areas.BEDROOM_TERMINAL:
 		var dialog = load("res://dialogue/bedroom_terminal.dialogue")
 		DialogueManager.show_example_dialogue_balloon(dialog,"start")
@@ -54,6 +52,9 @@ func show_area_dialogue(area_type):
 		DialogueManager.show_example_dialogue_balloon(dialog,"start")
 	elif area_type >= Common.Areas.LAB_JAR1 and area_type <= Common.Areas.LAB_JAR11:
 		var dialog = load("res://dialogue/lab_jar.dialogue")
+		DialogueManager.show_example_dialogue_balloon(dialog,"start")
+	elif area_type == Common.Areas.LAB_JAR_BROKEN:
+		var dialog = load("res://dialogue/lab_jar_broken.dialogue")
 		DialogueManager.show_example_dialogue_balloon(dialog,"start")
 	pass
 
@@ -93,7 +94,7 @@ func on_recv_door_unstable(door_idx):
 
 func set_all_fixedlight_color(color):
 	for i in $FixedLight.get_children():
-		i.set_color(Color(0.8,0.3,0.3))
+		i.set_color(color)
 	pass
 
 func _process(delta):

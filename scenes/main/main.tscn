@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://ck685deas71ll"]
+[gd_scene load_steps=50 format=3 uid="uid://ck685deas71ll"]
 
 [ext_resource type="Texture2D" uid="uid://tv08md68h2a" path="res://assets/img/fantety_tile.png" id="1_7ylkc"]
 [ext_resource type="Script" path="res://scenes/main/scripts/main.gd" id="1_tyiwk"]
@@ -22,6 +22,7 @@
 [ext_resource type="Shader" path="res://scenes/main/shader/vertigo.gdshader" id="20_7swh7"]
 [ext_resource type="PackedScene" uid="uid://bdjps3qjsmv5d" path="res://scenes/LabJar/lab_jar.tscn" id="21_orfpf"]
 [ext_resource type="PackedScene" uid="uid://c8ktef65n61xn" path="res://scenes/LabJar/lab_jar_broken.tscn" id="22_50aj6"]
+[ext_resource type="PackedScene" uid="uid://bnh5l3nycm21q" path="res://scenes/LabDesk/fantety_lab_desk.tscn" id="23_ghow7"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_bxd6f"]
 polygon = PackedVector2Array(-16, -16, 16, -16, 16, 0, -16, 0)
@@ -421,7 +422,7 @@ layer_4/modulate = Color(1, 1, 1, 1)
 layer_4/y_sort_enabled = false
 layer_4/y_sort_origin = 0
 layer_4/z_index = 0
-layer_4/tile_data = PackedInt32Array(131092, 0, 4, 131093, 65536, 4, 131089, 262144, 5, 131090, 327680, 5, 131088, 65536, 3, 131086, 262144, 4, 131087, 327680, 4, 21, 720896, 0, 15, 524288, 0, 16, 589824, 0, 17, 655360, 0, 131084, 393216, 5, 131085, 458752, 5, 12, 720896, 0)
+layer_4/tile_data = PackedInt32Array(131092, 0, 4, 131093, 65536, 4, 131089, 262144, 5, 131090, 327680, 5, 131088, 65536, 3, 131086, 262144, 4, 131087, 327680, 4, 21, 720896, 0, 15, 524288, 0, 16, 589824, 0, 17, 655360, 0, 131084, 393216, 5, 131085, 458752, 5, 12, 720896, 0, 786418, 524288, 0, 786419, 589824, 0, 786420, 655360, 0, 786424, 720896, 0)
 layer_5/name = "front"
 layer_5/enabled = true
 layer_5/modulate = Color(1, 1, 1, 1)
@@ -770,3 +771,22 @@ position = Vector2(75, 457)
 
 [node name="LabJarBroken" parent="FantetyLab" instance=ExtResource("22_50aj6")]
 position = Vector2(-309, 457)
+
+[node name="FantetyLabDesk" parent="FantetyLab" instance=ExtResource("23_ghow7")]
+position = Vector2(-1099, 458)
+
+[node name="Lights" type="Node2D" parent="FantetyLab"]
+
+[node name="PointLight2D" type="PointLight2D" parent="FantetyLab/Lights"]
+position = Vector2(-1020, 380)
+scale = Vector2(0.315068, 0.123002)
+shadow_enabled = true
+texture = ExtResource("3_1067c")
+offset = Vector2(0, 387.513)
+
+[node name="PointLight2D2" type="PointLight2D" parent="FantetyLab/Lights"]
+position = Vector2(-857.5, 381)
+scale = Vector2(0.124592, 0.123002)
+shadow_enabled = true
+texture = ExtResource("3_1067c")
+offset = Vector2(0, 387.513)

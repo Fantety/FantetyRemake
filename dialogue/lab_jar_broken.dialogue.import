@@ -1,0 +1,14 @@
+[remap]
+
+importer="dialogue_manager_compiler_7"
+type="Resource"
+uid="uid://5lgr1pnq17ec"
+path="res://.godot/imported/lab_jar_broken.dialogue-73f84ad2745ccdacca3208016cd20c20.tres"
+
+[deps]
+
+source_file="res://dialogue/lab_jar_broken.dialogue"
+dest_files=["res://.godot/imported/lab_jar_broken.dialogue-73f84ad2745ccdacca3208016cd20c20.tres"]
+
+[params]
+

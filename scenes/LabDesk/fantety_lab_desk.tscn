@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://bnh5l3nycm21q"]
+
+[ext_resource type="Texture2D" uid="uid://c74mp2gsrdoi8" path="res://assets/img/fantety_lab_desk.png" id="1_e4f4h"]
+[ext_resource type="Texture2D" uid="uid://bo5n6a2w53qg6" path="res://assets/img/lights/light_screen.png" id="2_j8coo"]
+[ext_resource type="Texture2D" uid="uid://m6rt7cchlecx" path="res://assets/img/lights/fantety_lab_desk_light.png" id="3_ua3uw"]
+[ext_resource type="Texture2D" uid="uid://bidxsb1k7lypm" path="res://assets/img/lights/fantety_lab_desk_light_item.png" id="4_rprto"]
+
+[node name="FantetyLabDesk" type="Sprite2D"]
+texture = ExtResource("1_e4f4h")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(-54.5, -10.125)
+scale = Vector2(0.261147, 0.236239)
+color = Color(0, 0.803922, 1, 1)
+texture = ExtResource("2_j8coo")
+
+[node name="PointLight2D2" type="PointLight2D" parent="."]
+position = Vector2(16.25, -9.125)
+scale = Vector2(0.245223, 0.236239)
+color = Color(0.4, 0.713726, 1, 1)
+texture = ExtResource("2_j8coo")
+
+[node name="DeskLight" type="PointLight2D" parent="."]
+texture = ExtResource("3_ua3uw")
+
+[node name="DeskLightItem" type="PointLight2D" parent="."]
+light_mask = 0
+energy = 0.6
+shadow_enabled = true
+texture = ExtResource("4_rprto")
